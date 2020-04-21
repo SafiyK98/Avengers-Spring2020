@@ -1,8 +1,8 @@
-1, Bridge Landing, A narrow bridge towers the ocean and faces you at a majestic castle., N : E : S : W 
-2, Entrance Room, The entrance to the castle lies at the end of a long bridge.  The interior is white marble.  In front of you are two fountains., 
-3
-4
-5
+1, Bridge Landing, A narrow bridge towers the ocean and faces you at a majestic castle., 2, 0, 0, 0, 0, 0
+2, Entrance Room, The entrance to the castle lies at the end of a long bridge.  The interior is white marble.  In front of you are two fountains., 0, 3, 1, 9, 0, 0 
+3, SE1, de, 0, 0, 0, 0, 0, 0 
+4, na, de, 0, 0, 0, 0, 0, 0 
+5, na, de, 0, 0, 0, 0, 0, 0 
 6
 7
 8
