@@ -1,1 +1,11 @@
-This 
+1, King's Knight, King’s first line of protection., 40, 10, 11, 12, 13, 14, 15, 16, 19, 23
+2, King’s “Servants”, King’s unintended line of protection!, 80, 3, 5, 7, 9, 17, 20, 22, 24, 25
+3, King’s Royal Knight, King’s expert and most trusted guard., 50, 6, 8, 10, 14, 16, 21, 22
+4, Zombie, The dead become living! Beware of this monster this monster will spawn in the graveyard area., 60, 27, 28
+5, Ghost, The living becomes a spirit! Beware of this monster this monster will spawn in the graveyard area., 40, 27, 28
+6, Black Knight Ghost, Mysterious knight armor comes alive! This boss spawns in both of the mausoleums., 70, 29
+7, Royal Zombie, What’s royal about this zombie? The dead become living again!!! This time the King has spawned in one of the mausoleums. Spawns in the wine cellar., 80, 28
+8, Giant Rat, Basic monster. Appears in entrance and bridge landing., 50, 1, 2, 4, 18, 26, 27
+9, False King, The final monster. This boss culminates the story., 120, 30
+
+//ID, Name, Descrpition, Health points, Spawn Locations
