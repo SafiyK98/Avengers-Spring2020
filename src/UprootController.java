@@ -8,30 +8,28 @@ public class UprootController implements ActionListener{
 	
 	private UprootGUI view;
 	
-	private boolean newGame;
+	private boolean newGame = true;
 	
 	
 	public UprootController(UprootModel model, UprootGUI view) {
 		this.model = model;
 		this.view = view;
 		
-		
+		startGame();
 
-		
-		createPlayer();
 		
 	}
 	
+	public void startGame() {
+		model.startNewGame();
+		view.setDisplay(model.getValue());
+		
+		
+	}
 	public void gameDescription() {
 		model.gameDescription();
 		view.setDisplay(model.getValue());
 	}
-	
-	public void createPlayer() {
-		model.createPlayer();
-		view.setDisplay(model.getValue());
-	}
-	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.equals("Exit")) {
@@ -58,6 +56,12 @@ public class UprootController implements ActionListener{
 			view.setDisplay(model.getValue());
 		} else if (command.contentEquals("<")) {
 			model.moveWest();
+			view.setDisplay(model.getValue());
+		} else if (newGame == true){
+			model.createPlayer(command);
+			view.setDisplay(model.getValue());
+			newGame = false;
+			model.gameDescription();
 			view.setDisplay(model.getValue());
 		} else {
 			model.applyCommand(command);

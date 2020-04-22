@@ -144,6 +144,11 @@ public class Game {
 		return description;
 	}
 	
+	//Method to set the player
+	void setPlayer(Player p) {
+		this.player = p;
+	}
+	
 	
 	//Methods to move directions
 	String moveNorth(){
