@@ -26,15 +26,23 @@ public class UprootModel {
 		game = new Game(rooms,items,puzzles, monsters, helpCommands,description);
 	}
 	
-	//Method to display start of game
+	//Method to start new game 
+	public void startNewGame() {
+		displayValue = "Please enter a Player name: ";
+	}
+	
+	//Method to display game description at the start of a new game
 	public void gameDescription() {
 		displayValue = game.displayDescription();
 	}
 	
 	//Method to create new player
-	public void createPlayer() {
-		displayValue = "Please enter a Player name: ";
+	public void createPlayer(String name) {
+		displayValue = "Welcome " + name +"! Today, you will be known as Prince and the King's Eldest son.";
+		game.setPlayer(new Player(1, name, 100, 1));
 	}
+	
+	
 	//Method to display text to player
 	public String getValue() {
 		return displayValue;
