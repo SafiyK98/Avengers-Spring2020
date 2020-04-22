@@ -2,12 +2,13 @@ import java.util.ArrayList;
 
 public class Player extends Entity{
 
+	//private variables for player class
 	private ArrayList<Item> inventory = new ArrayList<Item>();
 	private ArrayList<Equipable> equipped = new ArrayList<Equipable>();
 	private int currentLocation;
 	
-	Player(int ID, String name, String description, int HP, int location){
-		super(ID, name, description, HP);
+	Player(int ID, String name, int HP, int location){
+		super(ID, name, "You are the Kings eldest son, a Prince.", HP);
 		this.currentLocation = location; 
 	}
 	
@@ -62,7 +63,7 @@ public class Player extends Entity{
 		else {
 			int addedAttack = 0;
 			for(int i = 0; i<equippedItems.size(); i++) {
-				addedAttack = addedAttack+ equippedItems.get(i).getAD();
+//				addedAttack = addedAttack+ equippedItems.get(i).getAD();
 			}
 			int addedDamage =  (int) (attackDamage*(addedAttack*0.01));
 			System.out.println("You attack the monster and deal damage of " +  (attackDamage + addedAttack));

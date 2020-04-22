@@ -1,4 +1,3 @@
-
 public class UprootModel {
 
 	//This is the current display to the player
@@ -22,7 +21,7 @@ public class UprootModel {
 	
 	//Method to display text to player
 	public String getValue() {
-		return displayString;
+		return displayValue;
 	}
 	
 	//Method for model to save game
@@ -32,32 +31,38 @@ public class UprootModel {
 	
 	//Method for model to move up
 	public void moveUp() {
-		
+		displayString = game.moveUp();
+		displayValue = displayValue + "\n" + displayString;
 	}
 	
 	//Method for model to move down
 	public void moveDown() {
-		
+		displayString = game.moveDown();
+		displayValue = displayValue + "\n" + displayString;
 	}
 	
 	//Method for model to move north
 	public void moveNorth() {
-			
+		displayString = game.moveNorth();
+		displayValue = displayValue + "\n" + displayString;	
 	}
 	
 	//Method for model to move east
 	public void moveEast() {
-			
+		displayString = game.moveEast();
+		displayValue = displayValue + "\n" + displayString;	
 	} 
 	
 	//Method for model to move south
 	public void moveSouth() {
-			
+		displayString = game.moveSouth();
+		displayValue = displayValue + "\n" + displayString;	
 	}
 	
 	//Method for model to move west
 	public void moveWest() {
-			
+		displayString = game.moveWest();
+		displayValue = displayValue + "\n" + displayString;	
 	}
 	
 	//Method for model to apply text command from player

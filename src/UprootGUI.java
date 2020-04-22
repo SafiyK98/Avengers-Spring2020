@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +26,7 @@ public class UprootGUI extends JFrame{
 	private JTextField playerInput;
 	
 	//Menu buttons for directions
-	private JPanel buttonsPanel;
+	private JPanel buttonsPanel; 
 	
 	private JMenu menu;
 	
@@ -36,13 +37,13 @@ public class UprootGUI extends JFrame{
 	//Creates the panel and components for the JFrame
 	public UprootGUI() {
 		super("UPROOT");
+
 		
 		//create the menuBar
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		menu = new JMenu("Menu");
-		menuBar.add(menu);
 		
 		JMenuItem startNewButton = new JMenuItem("Start New Game");
 		menu.add(startNewButton);
@@ -52,24 +53,39 @@ public class UprootGUI extends JFrame{
 		
 		JMenuItem exitButton = new JMenuItem("Exit");
 		menu.add(exitButton);
+		menuBar.add(menu);
 		
 		
+		buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new GridLayout(3,5));
+		buttonsPanel.setSize(200, 200);
+		
+		String[] buttonStrings = {
+				"UP"," ", " ", "^", " ",
+				" "," ", "<", " ", ">",
+				"DOWN"," ", " ", "v", " "
+		};
+		
+		for (String s: buttonStrings) {
+			if(!s.equals(""))
+				buttonsPanel.add(new JButton(s));
+		}
+		
+		
+
 		
 		//Create the textfield box for player
 		playerInput = new JTextField(100);
-		add(playerInput, BorderLayout.SOUTH);
-		
-		
-		
+		playerInput.setSize(100, 200);
+	
 		
 		// create the display
 		JPanel displayPanel = new JPanel();
-		add(displayPanel, BorderLayout.NORTH);
-		
 		displayText = new JLabel("Welcome to UPROOT!");
 		displayPanel.add(displayText);
 		displayPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		
+		displayPanel.setSize(300, 200);
+	
 		
 		
 		
@@ -77,22 +93,14 @@ public class UprootGUI extends JFrame{
 		buttonsPanel = new JPanel();
 		
 		//add image of map to top right corner
-		map = new ImageIcon("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor0.png");
-		buttonsPanel.add(new JLabel(map), BorderLayout.NORTH);
+//		map = new ImageIcon("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor0.png");
+//		buttonsPanel.add(new JLabel(map), BorderLayout.NORTH);
 		
-		add(buttonsPanel, BorderLayout.EAST);
-		buttonsPanel.setLayout(new GridLayout(5,3,0,0));
 		
-		String[] buttonStrings = {
-				"UP","", "", "^", "",
-				"","", "<", "", ">",
-				"DOWN","", "", "v", ""
-		};
+		add(displayPanel);
+		add(buttonsPanel);
+		add(playerInput);
 		
-		for (String s: buttonStrings) {
-			if(!s.equals(""))
-				buttonsPanel.add(new JButton(s));
-		}
 	}
 	
 	
