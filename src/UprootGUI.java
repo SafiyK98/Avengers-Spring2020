@@ -1,43 +1,54 @@
-import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.TextField;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Panel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
-
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class UprootGUI extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//Used to store the output for the player
-	private JLabel displayText;
+	private JLabel display = new JLabel("<HTML>Welcome to UPROOT!</HTML>");
 	
 	//Used to take input from the player
-	private JTextField playerInput;
+	private TextField input = new TextField();
 	
-	//Menu buttons for directions
-	private JPanel buttonsPanel; 
+	private Panel buttons = new Panel();
+	
+	private JLabel inventory = new JLabel("<HTML>Player Inventory:</HTML>");
 	
 	private JMenu menu;
 	
-	private ImageIcon map;
+	//private ImageIcon map;
+	private Component map;
+
 
 	
 	
 	//Creates the panel and components for the JFrame
-	public UprootGUI() {
+	@SuppressWarnings("deprecation")
+	public UprootGUI(){
 		super("UPROOT");
-
+		
 		
 		//create the menuBar
 		JMenuBar menuBar = new JMenuBar();
@@ -56,57 +67,75 @@ public class UprootGUI extends JFrame{
 		menuBar.add(menu);
 		
 		
-		buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new GridLayout(3,5));
-		buttonsPanel.setSize(200, 200);
+
+		buttons.setLayout(new GridLayout(3,4));
+		buttons.setPreferredSize(new Dimension(490,205));
 		
 		String[] buttonStrings = {
-				"UP"," ", " ", "^", " ",
-				" "," ", "<", " ", ">",
-				"DOWN"," ", " ", "v", " "
+				"UP", "s", "^", "s",
+				"s", "<", "s", ">",
+				"DOWN", "s", "v", "s"
 		};
 		
 		for (String s: buttonStrings) {
-			if(!s.equals(""))
-				buttonsPanel.add(new JButton(s));
+			Button button = new Button(s);
+			if(s.equalsIgnoreCase("s")) {
+				button = new Button(" ");
+				button.disable();
+			}
+			button.setBackground(Color.DARK_GRAY);
+			buttons.add(button);
+
 		}
 		
+		File f = new File("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor1.png");
+		
+		JLabel floor1 = new JLabel(new ImageIcon(f.getName()));
+		map = floor1;
+		map.setPreferredSize(new Dimension(490,500));
+	
+		
+		Border border = LineBorder.createBlackLineBorder();
+		
+		inventory.setOpaque(true);
+		inventory.setPreferredSize(new Dimension(490,230));
+		inventory.setBackground(Color.WHITE);
+		inventory.setAlignmentY(TOP_ALIGNMENT);
+		inventory.setBorder(border);
+		inventory.setVerticalTextPosition(JLabel.TOP);
+		
+		Panel sidePanel = new Panel();
+		sidePanel.setPreferredSize(new Dimension(500,800));
+		sidePanel.setBackground(Color.DARK_GRAY);
+		sidePanel.add("North", map);
+		sidePanel.add("Center", inventory);
+		sidePanel.add("South", buttons);
 		
 
 		
+		
 		//Create the textfield box for player
-		playerInput = new JTextField(100);
-		playerInput.setSize(100, 200);
+		input.setPreferredSize(new Dimension(100, 100));
 	
+		display.setOpaque(true);
+		display.setBackground(Color.WHITE);
+		display.setPreferredSize(new Dimension(1000,1000));
+		display.setBorder(border);
+		display.setVerticalTextPosition(JLabel.TOP);
 		
 		// create the display
-		JPanel displayPanel = new JPanel();
-		displayText = new JLabel("Welcome to UPROOT!");
-		displayPanel.add(displayText);
-		displayPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		displayPanel.setSize(300, 200);
+		add("Center", display);
+		add("South", input);
+		add("East", sidePanel);
+		
 	
-		
-		
-		
-		//create the direction buttons
-		buttonsPanel = new JPanel();
-		
-		//add image of map to top right corner
-//		map = new ImageIcon("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor0.png");
-//		buttonsPanel.add(new JLabel(map), BorderLayout.NORTH);
-		
-		
-		add(displayPanel);
-		add(buttonsPanel);
-		add(playerInput);
 		
 	}
 	
 	
 	//register the controller as the listener to the menu items, buttons and textfield
 	public void registerListener(UprootController controller) {
-		Component[] components = buttonsPanel.getComponents(); 
+		Component[] components = buttons.getComponents(); 
 		for (Component component : components) {
 			if (component instanceof AbstractButton) {
 				AbstractButton button = (AbstractButton) component;
@@ -122,32 +151,30 @@ public class UprootGUI extends JFrame{
 			}
 		}
 		
-		playerInput.addActionListener(controller);
-		
+		input.addActionListener(controller);
 	}
 	
 	
-	//display the new output to the player in the JLabel
-	public void updateText(String value) {
-		displayText.setText(displayText + "\n" + value);
+	//display the new output to the player in the JLabel	
+	public void setDisplay(String s){ 
+		int textLength = display.getText().length()-7;
+		display.setText(display.getText().substring(0, textLength) + "<BR><BR>" + s + "</HTML>");
+		}
+	public String getDisplay()
+	{	return display.getText();
 	}
 	
-	//change the image of the map when the player changes floor
-//	public void updateImage(int level) {
-//		if (level == 1) {
-//			map = new ImageIcon("addpath to image");
-//			displayPanel.add(map, BorderLayout.NORTHEAST);
-//		}
-//		
-//		if (level == 2) {
-//			map = new ImageIcon("addpath to image");
-//			displayPanel.add(map, BorderLayout.NORTHEAST);
-//		}
-//		
-//		if (level == 3) {
-//			map = new ImageIcon("addpath to image");
-//			displayPanel.add(map, BorderLayout.NORTHEAST);
-//		}
-//	}
+	public void addToInventory(String s) {
+		int textLength = inventory.getText().length()-7;
+		inventory.setText(inventory.getText().substring(0, textLength) + "<BR>- " + s + "</HTML>");
+	}
+	
+	public static class CloseListener extends WindowAdapter
+	{	public void windowClosing(WindowEvent e)
+		{	e.getWindow().setVisible(false);
+			System.exit(0);
+		}
+	}
+	
 	
 }

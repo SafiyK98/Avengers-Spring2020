@@ -1,24 +1,40 @@
+import java.io.File;
+
 public class UprootModel {
 
-	//This is the current display to the player
+	//This is the current line of text to display to the player
 	private String displayValue;
 	
-	//This will be the string corresponding to what the player is trying to do
-	private String displayString;
-	
-	//This will store the last operation entered by the player
-	private String operation;
 	
 	//This hashmap will store the rooms
 	private Game game;
+
+	
+	
+	//Below are the text files for the game 
+	static File rooms = new File(System.getProperty("user.dir")+"/"+"Rooms.txt");
+	static File navigation = new File(System.getProperty("user.dir") + "/" + "NavigationCommands.txt");
+	static File items = new File(System.getProperty("user.dir") + "/" + "Items.txt");
+	static File puzzles = new File(System.getProperty("user.dir") + "/" + "Puzzles.txt");
+	static File helpCommands = new File(System.getProperty("user.dir") + "/" + "Help Commands.txt");
+	static File monsters = new File(System.getProperty("user.dir") + "/" + "Monster.txt");
+	static File description = new File(System.getProperty("user.dir") + "/" + "GameDescription.txt");
+	
 	
 	//Constructor for a new model
 	public UprootModel() {
-		displayValue = "Welcome to UPROOT!";
-		displayString = "" + displayValue;
-		operation = "";
+		game = new Game(rooms,items,puzzles, monsters, helpCommands,description);
 	}
 	
+	//Method to display start of game
+	public void gameDescription() {
+		displayValue = game.displayDescription();
+	}
+	
+	//Method to create new player
+	public void createPlayer() {
+		displayValue = "Please enter a Player name: ";
+	}
 	//Method to display text to player
 	public String getValue() {
 		return displayValue;
@@ -31,43 +47,37 @@ public class UprootModel {
 	
 	//Method for model to move up
 	public void moveUp() {
-		displayString = game.moveUp();
-		displayValue = displayValue + "\n" + displayString;
+		displayValue = game.moveUp();
 	}
 	
 	//Method for model to move down
 	public void moveDown() {
-		displayString = game.moveDown();
-		displayValue = displayValue + "\n" + displayString;
+		displayValue = game.moveDown();
 	}
 	
 	//Method for model to move north
 	public void moveNorth() {
-		displayString = game.moveNorth();
-		displayValue = displayValue + "\n" + displayString;	
+		displayValue = game.moveNorth();
 	}
 	
 	//Method for model to move east
 	public void moveEast() {
-		displayString = game.moveEast();
-		displayValue = displayValue + "\n" + displayString;	
+		displayValue = game.moveEast();
 	} 
 	
 	//Method for model to move south
 	public void moveSouth() {
-		displayString = game.moveSouth();
-		displayValue = displayValue + "\n" + displayString;	
+		displayValue = game.moveSouth();
 	}
 	
 	//Method for model to move west
 	public void moveWest() {
-		displayString = game.moveWest();
-		displayValue = displayValue + "\n" + displayString;	
+		displayValue = game.moveWest();
 	}
 	
 	//Method for model to apply text command from player
 	public void applyCommand(String text) {
-		
+		displayValue = game.applyCommand(text);
 	}
 	
 }

@@ -18,20 +18,27 @@ public class Game {
 	//Stores all the monsters in the game
 	HashMap<Integer, Monster> hmMonsters;
 	
+	//Stores all the help commands in the game
+	HashMap<String, String> hmHelpCommands;
+	
 	//Stores the current Player
 	Player player;
 	
 	//Scanner for the game class
 	Scanner sc;
 	
+	//Stores the game description
+	String description;
 	
 	
-	Game(int playerID, String playerName, File rooms, File items, File puzzles, File monsters, File helpCommands, File description){
+	
+	Game(File rooms, File items, File puzzles, File monsters, File helpCommands, File description){
+		//Read all of the files
 		readRooms(rooms);
-		readItems(items);
-		readPuzzles(puzzles);
-		readMonsters(monsters);
-		readHelpCommands(helpCommands);
+//		readItems(items);
+//		readPuzzles(puzzles);
+//		readMonsters(monsters);
+//		readHelpCommands(helpCommands);
 		readDescription(description);
 		
 	}
@@ -51,11 +58,22 @@ public class Game {
 			//split each line on the comma and add to array
 			String[] strParts = sc.nextLine().split( "," ); 
 			
+			if(strParts[0]!= "") {
 			//read from array and create Room object and add to ArrayList
-			Room room = new Room(Integer.parseInt(strParts[0]), strParts[1], strParts[2], Integer.parseInt(strParts[3]),
-					Integer.parseInt(strParts[4]), Integer.parseInt(strParts[5]), Integer.parseInt(strParts[6]), Integer.parseInt(strParts[7]),Integer.parseInt(strParts[8]));
+				int a = Integer.parseInt(strParts[0]);
+				String b = strParts[1];
+				String c = strParts[2];
+				int d = Integer.parseInt(strParts[3]);
+				int e = Integer.parseInt(strParts[4]);
+				int f = Integer.parseInt(strParts[5]);
+				int g = Integer.parseInt(strParts[6]);
+				int h = Integer.parseInt(strParts[7]);
+				int i = Integer.parseInt(strParts[8]);
+					
+				Room room = new Room(a,b,c,d,e,f,g,h,i);
 				
-			hmRooms.put(room.getID(), room);
+				hmRooms.put(room.getID(), room);
+			}
 		  }
 	}
 	
@@ -105,7 +123,14 @@ public class Game {
 	
 	//Method to read the game description
 	void readDescription(File description) {
-		
+		try {
+			sc = new Scanner(description);
+		} catch(FileNotFoundException e) {
+			System.out.print("No such file exists");
+		}
+		while(sc.hasNextLine()) {
+			this.description = sc.nextLine();
+		}
 	}
 	
 	
@@ -114,7 +139,10 @@ public class Game {
 	
 	
 	
-	
+	//Method to display the game description
+	String displayDescription() {
+		return description;
+	}
 	
 	
 	//Methods to move directions
@@ -208,6 +236,11 @@ public class Game {
 			return "You are now in the " + currentRoom.getName() + ".";
 		}
 		
+	}
+	
+	//Method to apply other commands 
+	String applyCommand(String text) {
+		return "";
 	}
 	
 
