@@ -1,4 +1,100 @@
 
-public class Puzzle {
+public class Puzzle 
+{
+	private int ID;
+	private String description;
+	private String hint;
+	private String solution;
+	private int locationOpen;
+	private int locationPlaced;
+	
+	public Puzzle(int iD, String description, String hint, String solution, int locationOpen, int locationPlaced) {
+		super();
+		ID = iD;
+		this.description = description;
+		this.hint = hint;
+		this.solution = solution;
+		this.locationOpen = locationOpen;
+		this.locationPlaced = locationPlaced;
+	}
 
+
+	public int getLocationOpen() {
+		return locationOpen;
+	}
+
+
+	public void setLocationOpen(int locationOpen) {
+		this.locationOpen = locationOpen;
+	}
+
+
+	public int getLocationPlaced() {
+		return locationPlaced;
+	}
+
+
+	public void setLocationPlaced(int locationPlaced) {
+		this.locationPlaced = locationPlaced;
+	}
+
+
+	public void openRoom()
+	{
+		return;
+	}
+
+
+	public int getID() {
+		return ID;
+	}
+
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getHint() {
+		return hint;
+	}
+
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+
+	public String getSolution() {
+		return solution;
+	}
+
+
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Puzzle [ID=" + ID + ", description=" + description + ", hint=" + hint + ", solution=" + solution
+				+ ", locationOpen=" + locationOpen + ", locationPlaced=" + locationPlaced + "]";
+	}
+
+
+	
+
+	
+	
+	
 }

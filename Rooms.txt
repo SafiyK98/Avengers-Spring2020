@@ -28,4 +28,4 @@
 28, Graveyard, A graveyard hosts rows of graves. The graves are from hundreds of years old to empty... At the end of the grave lies three distinct graves. Should you approach them?,0,29,26,0,0,0
 29, Mausoleum 1, The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,0,0,30,28,0,0
 30, Mausoleum 2, The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,29,0,0,0,0,31
-31, Wine Cellar, The lock to the wine cellar looks suspiciously like the key you found in the mausoleum after the kind ghost let you enter. ,0,0,0,0,0,0
+31, Wine Cellar, The lock to the wine cellar looks suspiciously like the key you found in the mausoleum after the kind ghost let you enter.,0,0,0,0,0,0

@@ -36,7 +36,7 @@ public class Game {
 		//Read all of the files
 		readRooms(rooms);
 //		readItems(items);
-//		readPuzzles(puzzles);
+		readPuzzles(puzzles);
 //		readMonsters(monsters);
 //		readHelpCommands(helpCommands);
 		readDescription(description);
@@ -101,13 +101,32 @@ public class Game {
 	
 	//Method to read the puzzle file
 	void readPuzzles(File puzzles) {
-			try {
+			try 
+			{
 				sc = new Scanner(puzzles);
-			} catch(FileNotFoundException e) {
+			} 
+			catch(FileNotFoundException e) 
+			{
 				System.out.print("No such file exists");
 			}
 			hmPuzzles = new HashMap<Integer, Puzzle>();
-			while(sc.hasNextLine()) {
+			while(sc.hasNextLine()) 
+			{
+				String[] strParts = sc.nextLine().split(",");
+				
+				if(strParts[0]!= "") {
+					//read from array and create Puzzle object and add to Hashmap
+						int id = Integer.parseInt(strParts[0]);
+						String desc = strParts[1];
+						String hint = strParts[2];
+						String solution = strParts[3];
+						int locationOpen = Integer.parseInt(strParts[4]);
+						int locationPlaced = Integer.parseInt(strParts[5]);
+							
+						Puzzle puzzle = new Puzzle(id, desc, hint, solution, locationOpen, locationPlaced);
+						
+						hmPuzzles.put(puzzle.getID(), puzzle);
+					}
 			}
 	}
 	
