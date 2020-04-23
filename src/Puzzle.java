@@ -1,6 +1,12 @@
 
 public class Puzzle 
 {
+	public Puzzle() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	private int ID;
 	private String description;
 	private String hint;

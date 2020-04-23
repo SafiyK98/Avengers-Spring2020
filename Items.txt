@@ -1,18 +1,18 @@
-1, Fish, Delicious fish! How did this get in a fountain though?, 20, 0
-2, Mutton, A leg of mutton; sheep is healthy for you., 30, 0
-3, Iron Fence Post, The post from a graveyard fence can be pulled off., 0, 10
-4, Wood Planks, Wood planks lie on a grave; can be used as a last resort if you have no weapons., 0, 5
-5, Spell scroll, A rare and strange magical scroll whose contents are unreadable. If used during battle Zombie’s Health Points will be reduced to 0., 40, 0
-6, Gold Soap, A beautiful bar of soap; though not very practical. A decorative item that serves no purpose in battle., 0, 0
-7, Wine, Good for the heart., 15, 0
-8, Shield, A protective shield; identical to the crest on the East Hall. Damage dealt is reduced by 25%., 25, 0
-9, Sword, A long sharp red-handled sword., 0, 25
-10, Dagger, A small dull white-handled dagger. Something seems special about it... might come in handy later, 0, 10, 
-11, Enchanted Gold Statue, Ooh Shiny! This enchanted statue has a strange yet welcoming feeling. The statue is yelling "TAKE ME!", 0, 0
-12, Potion, A delicious elixir; shiny and vibrant purple., 40, 0
-13, Bread, A loaf of fluffy bread., 20, 0
-14, Shrimp, This shrimp does not smell as healthy as the fish in the other fountain..., -5, 0
-15, Candy, A sweet candy!, 5, 0
+1, Fish, Delicious fish! How did this get in a fountain though?,20,0
+2, Mutton, A leg of mutton; sheep is healthy for you.,30,0
+3, Iron Fence Post, The post from a graveyard fence can be pulled off.,0,10
+4, Wood Planks, Wood planks lie on a grave; can be used as a last resort if you have no weapons.,0,5
+5, Spell scroll, A rare and strange magical scroll whose contents are unreadable. If used during battle Zombie’s Health Points will be reduced to 0.,40,0
+6, Gold Soap, A beautiful bar of soap; though not very practical. A decorative item that serves no purpose in battle.,0,0
+7, Wine, Good for the heart.,15,0
+8, Shield, A protective shield; identical to the crest on the East Hall. Damage dealt is reduced by 25%.,25,0
+9, Sword, A long sharp red-handled sword.,0,25
+10, Dagger, A small dull white-handled dagger. Something seems special about it... might come in handy later,0,10, 
+11, Enchanted Gold Statue, Ooh Shiny! This enchanted statue has a strange yet welcoming feeling. The statue is yelling "TAKE ME!",0,0
+12, Potion, A delicious elixir; shiny and vibrant purple.,40,0
+13, Bread, A loaf of fluffy bread.,20,0
+14, Shrimp, This shrimp does not smell as healthy as the fish in the other fountain...,-5,0
+15, Candy, A sweet candy!,5,0
 
 
 //ID, Name, Description, health, attack
