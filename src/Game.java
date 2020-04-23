@@ -32,7 +32,8 @@ public class Game {
 	
 	
 	
-	Game(File rooms, File items, File puzzles, File monsters, File helpCommands, File description){
+	Game(File rooms, File items, File puzzles, File monsters, File helpCommands, File description)
+	{
 		//Read all of the files
 		readRooms(rooms);
 //		readItems(items);

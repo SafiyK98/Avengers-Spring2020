@@ -1,11 +1,11 @@
-1, King's Knight, King’s first line of protection., 40:10,11,12,13,14,15,16,19,23,7,9
-2, King’s “Servants”, King’s unintended line of protection!, 80:3,5,7,9,17,20,22,24,25,5,6
-3, King’s Royal Knight, King’s expert and most trusted guard., 50:6,8,10,14,16,21,22,0,0,6,10
-4, Zombie, The dead become living! Beware of this monster this monster will spawn in the graveyard area., 60:27,28,0,0,0,0,0,0,0,6,8
-5, Ghost, The living becomes a spirit! Beware of this monster this monster will spawn in the graveyard area., 40:27,28,0,0,0,0,0,0,0,5,6
-6, Black Knight Ghost, Mysterious knight armor comes alive! This boss spawns in both of the mausoleums., 70:29,0,0,0,0,0,0,0,0,6,9
-7, Royal Zombie, What’s royal about this zombie? The dead become living again!!! This time the King has spawned in one of the mausoleums. Spawns in the wine cellar., 80:28,0,0,0,0,0,0,0,0,7,9
-8, Giant Rat, Basic monster. Appears in entrance and bridge landing., 50:1,2,4,18,26,27,0,0,0,5,5
-9, False King, The final monster. This boss culminates the story., 120:30,0,0,0,0,0,0,0,0,8,10
+1, King's Knight, King’s first line of protection.,40,7,9:10,11,12,13,14,15,16,19,23
+2, King’s “Servants”, King’s unintended line of protection!, 80,5,6:3,5,7,9,17,20,22,24,25
+3, King’s Royal Knight, King’s expert and most trusted guard., 50,6,10:6,8,10,14,16,21,22,0,0
+4, Zombie, The dead become living! Beware of this monster this monster will spawn in the graveyard area., 60,6,8:27,28,0,0,0,0,0,0,0
+5, Ghost, The living becomes a spirit! Beware of this monster this monster will spawn in the graveyard area., 40,5,6:27,28,0,0,0,0,0,0,0
+6, Black Knight Ghost, Mysterious knight armor comes alive! This boss spawns in both of the mausoleums., 70,6,9:29,0,0,0,0,0,0,0,0
+7, Royal Zombie, What’s royal about this zombie? The dead become living again!!! This time the King has spawned in one of the mausoleums. Spawns in the wine cellar., 80,7,9:28,0,0,0,0,0,0,0,0
+8, Giant Rat, Basic monster. Appears in entrance and bridge landing., 50,5,5:1,2,4,18,26,27,0,0,0
+9, False King, The final monster. This boss culminates the story., 120,8,10:30,0,0,0,0,0,0,0,0
 
-//ID, Name, Description, Health points: Spawn Locations (9), attack range min, attack range max
+//ID, Name, Description, Health points, attack range min, attack range max: Spawn Locations (9)
