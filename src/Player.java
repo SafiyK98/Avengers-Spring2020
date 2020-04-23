@@ -63,7 +63,7 @@ public class Player extends Entity{
 		else {
 			int addedAttack = 0;
 			for(int i = 0; i<equippedItems.size(); i++) {
-//				addedAttack = addedAttack+ equippedItems.get(i).getAD();
+				addedAttack = addedAttack + equippedItems.get(i).getAttack();
 			}
 			int addedDamage =  (int) (attackDamage*(addedAttack*0.01));
 			System.out.println("You attack the monster and deal damage of " +  (attackDamage + addedAttack));
