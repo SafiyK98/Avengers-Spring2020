@@ -60,17 +60,17 @@ public class Game {
 			
 			if(strParts[0]!= "") {
 			//read from array and create Room object and add to ArrayList
-				int a = Integer.parseInt(strParts[0]);
-				String b = strParts[1];
-				String c = strParts[2];
-				int d = Integer.parseInt(strParts[3]);
-				int e = Integer.parseInt(strParts[4]);
-				int f = Integer.parseInt(strParts[5]);
-				int g = Integer.parseInt(strParts[6]);
-				int h = Integer.parseInt(strParts[7]);
-				int i = Integer.parseInt(strParts[8]);
+				int id = Integer.parseInt(strParts[0]);
+				String name = strParts[1];
+				String desc = strParts[2];
+				int north = Integer.parseInt(strParts[3]);
+				int east = Integer.parseInt(strParts[4]);
+				int south = Integer.parseInt(strParts[5]);
+				int west = Integer.parseInt(strParts[6]);
+				int up = Integer.parseInt(strParts[7]);
+				int down = Integer.parseInt(strParts[8]);
 					
-				Room room = new Room(a,b,c,d,e,f,g,h,i);
+				Room room = new Room(id, name, desc, north, east, south, west, up, down);
 				
 				hmRooms.put(room.getID(), room);
 			}
@@ -78,22 +78,35 @@ public class Game {
 	}
 	
 	//Method to read the items file
-	void readItems(File items) {
-		try {
+	void readItems(File items) 
+	{
+		try 
+		{
 			sc = new Scanner(items);
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) 
+		{
 			System.out.print("No such file exists ");
 		}
+		
 		hmItems = new HashMap<Integer, Item>();
-		while (sc.hasNextLine()) {
+		
+		//split file into lines
+		while (sc.hasNextLine()) 
+		{
 			//split each line on the comma and add to array
 			String[] strParts = sc.nextLine().split( "," ); 
+			
 			Item item = null;
 			//read from array and create Item object and add to ArrayList
-			if(Integer.parseInt(strParts[4]) == 1) {
+			if(Integer.parseInt(strParts[4]) == 1) 
+			{
+				
 			}
 			
-			else {
+			else 
+			{
+				
 			}
 			
 		}

@@ -20,10 +20,11 @@ public class Room {
 	private Puzzle puzzle = null;
 	private Monster monster = null;
 
-	Room(int ID, String name, String description, int North, int East, int South, int West, int Up, int Down){
+	Room(int ID, String name, String description, int North, int East, int South, int West, int Up, int Down)
+	{
 		this.ID = ID; this.name = name; this.description = description;
 		this.North = North; this.East = East; this.South = South; this.West = West; this.Up = Up; this.Down = Down;
-		prevVisited = false;
+		this.prevVisited = false;
 	}
 	
 	//Get room ID
