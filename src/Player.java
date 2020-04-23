@@ -8,7 +8,7 @@ public class Player extends Entity{
 	private int currentLocation;
 	
 	Player(int ID, String name, int HP, int location){
-		super(ID, name, "You are the Kings eldest son, a Prince.", HP);
+		super(ID, name, "You are the Kings eldest son, a Prince.", 100);
 		this.currentLocation = location; 
 	}
 	
@@ -51,7 +51,7 @@ public class Player extends Entity{
 		ArrayList<Equipable> equippedItems = this.equipped;
 		int attackDamage = (int)(Math.random()*(50-1)) + 1;
 		
-		System.out.println("Player HP: " + HP + "        Monster HP: " + monster.getHP());
+		System.out.println("Player HP: " + this.HP + "        Monster HP: " + monster.getHP());
 		
 		//Player has no items equipped
 		if (equippedItems.isEmpty()) {
