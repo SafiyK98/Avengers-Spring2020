@@ -53,8 +53,10 @@ public class UprootController implements ActionListener{
 			model.newGame = false;
 		} else {
 			model.applyCommand(command);
+			view.updateInventory(model.getInventory());
 		}
 		view.setDisplay(model.getValue());
 		view.updateImage(model.getRoomLevel());
+		
 	}
 }

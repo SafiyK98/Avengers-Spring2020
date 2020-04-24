@@ -205,6 +205,11 @@ public class Game {
 		this.player = p;
 	}
 	
+	//Method to get the player
+	Player getPlayer() {
+		return player;
+	}
+	
 	//Method to initate game in the players current room
 	String startGame() {
 		int startingID = player.getLocation();
@@ -352,7 +357,7 @@ public class Game {
 		}
 		
 		else if(text.contains("Pick up") || text.contains("pick up")) {
-			pickUpItem(text);
+			response = pickUpItem(text);
 		}
 		
 			
@@ -414,10 +419,39 @@ public class Game {
 				}
 			}
 			if(yes == true) {
-				return "\n" + items.get(j).getName() + " has been picked up from the room and successfully added to the player inventory.";
+				Item item = items.get(j);
+				item.addItem(player, room);
+				return item.getName() + " has been picked up from the room and successfully added to the player inventory.";
+				
 			}
 			else {
 				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
+			}
+		}
+		
+		//Method to drop items
+		String dropItem(String text) {
+			ArrayList<Item> items = player.getInventory();
+			Room room = hmRooms.get(player.getLocation());
+			if(items.isEmpty()) {
+				return "Sorry, the player inventory is empty.";
+			}
+			int j =0;
+			boolean yes = false;
+			for(int i = 0; i<items.size(); i++) {
+				if(text.substring(5).equalsIgnoreCase(items.get(i).getName())) {
+					yes = true;
+					j = i;
+				}
+			}
+			if(yes == true) {
+				Item item = items.get(j);
+				item.dropItem(player, room);
+				return items.get(j).getName() + " has been dropped successfully from the player inventory and placed in the " + room.getName();
+				
+			}
+			else {
+				return "Sorry we did not find that item in the player inventory. Make sure to check your spelling.";
 			}
 		}
 

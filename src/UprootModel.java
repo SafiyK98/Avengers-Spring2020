@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 
 public class UprootModel {
 
@@ -46,8 +47,8 @@ public class UprootModel {
 	public void createPlayer(String name) {
 		game.setPlayer(new Player(1, name, 100, 1));
 		displayValue = "Welcome " + name +"! Today, you will be known as Prince and the King's Eldest son.";
-		displayValue = displayValue.substring(0, displayValue.length()-7) + "<BR><BR>" + game.displayDescription();
-		displayValue = displayValue.substring(0, displayValue.length()-7) + "<BR><BR>" + game.startGame();
+		displayValue = displayValue.substring(0, displayValue.length()) + "<BR><BR>" + game.displayDescription();
+		displayValue = displayValue.substring(0, displayValue.length()) + "<BR><BR>" + game.startGame();
 	}
 	
 	//Method to place player in their current location and begin game
@@ -110,6 +111,11 @@ public class UprootModel {
 	//Method for model to apply text command from player
 	public void applyCommand(String command) {
 		displayValue = game.applyCommand(command);
+	}
+	
+	//Method to get the player inventory to update the view
+	public ArrayList<Item> getInventory() {
+		return game.getPlayer().getInventory();
 	}
 	
 }

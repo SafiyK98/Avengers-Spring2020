@@ -7,6 +7,7 @@ import java.awt.Panel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -18,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -29,8 +32,7 @@ public class UprootGUI extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JScrollPane displayPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-		      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	private JScrollPane displayPane = new JScrollPane();
 
 	//Used to store the output for the player
 	private JLabel display = new JLabel("<HTML>Welcome to UPROOT!</HTML>");
@@ -40,7 +42,9 @@ public class UprootGUI extends JFrame{
 	
 	private Panel buttons = new Panel();
 	
-	private JLabel inventory = new JLabel("<HTML>Player Inventory:</HTML>");
+	private JLabel inventoryLabel = new JLabel("<HTML>Player Inventory:</HTML>");
+	
+	private JLabel inventory = new JLabel("");
 	
 	private JMenu menu;
 	
@@ -50,6 +54,8 @@ public class UprootGUI extends JFrame{
 	//Use to hold the map image
 	private ImageIcon image;
 	
+	int height= 850;
+	int width = 1000;
 
 
 	
@@ -58,8 +64,6 @@ public class UprootGUI extends JFrame{
 	@SuppressWarnings("deprecation")
 	public UprootGUI(){
 		super("UPROOT");
-		int height =1000;
-		int width = 1000;
 		this.setSize(width, height);
 		
 		//create the menuBar
@@ -81,7 +85,7 @@ public class UprootGUI extends JFrame{
 		
 
 		buttons.setLayout(new GridLayout(3,4));
-		buttons.setPreferredSize(new Dimension(490,(int) ((height-500)/2.5)));
+		buttons.setPreferredSize(new Dimension(490,(int) ((height-500)/3)));
 		
 		String[] buttonStrings = {
 				"Up", "s", "North", "s",
@@ -109,18 +113,31 @@ public class UprootGUI extends JFrame{
 		
 		Border border = LineBorder.createBlackLineBorder();
 		
+		JPanel inventoryPanel = new JPanel();
+		inventoryPanel.setPreferredSize(new Dimension(490,(int) ((height-500)/3)));
+		inventoryPanel.setBackground(Color.DARK_GRAY);
+		
+		
+		inventoryLabel.setOpaque(true);
+		inventoryLabel.setPreferredSize(new Dimension(490, 20));
+		inventoryLabel.setBackground(Color.WHITE);
+		inventoryLabel.setBorder(border);
+		inventoryLabel.setVerticalAlignment(JLabel.TOP);
+		
 		inventory.setOpaque(true);
-		inventory.setPreferredSize(new Dimension(490, (int) ((height-500)/2.7)));
+		inventory.setPreferredSize(new Dimension(500, (int) ((height-500)/3) - 20));
 		inventory.setBackground(Color.WHITE);
-		inventory.setAlignmentY(TOP_ALIGNMENT);
 		inventory.setBorder(border);
 		inventory.setVerticalAlignment(JLabel.TOP);
+		
+		inventoryPanel.add(inventoryLabel);
+		inventoryPanel.add(inventory);
 		
 		Panel sidePanel = new Panel();
 		sidePanel.setPreferredSize(new Dimension(500,800));
 		sidePanel.setBackground(Color.DARK_GRAY);
 		sidePanel.add("North", map);
-		sidePanel.add("Center", inventory);
+		sidePanel.add("Center", inventoryPanel);
 		sidePanel.add("South", buttons);
 		
 
@@ -132,11 +149,16 @@ public class UprootGUI extends JFrame{
 		display.setOpaque(true);
 		display.setBackground(Color.WHITE);
 		display.setBorder(border);
-		display.setPreferredSize(new Dimension(width-500, 900));
+		display.setPreferredSize(new Dimension(width-520, display.getText().length()));
 		display.setVerticalAlignment(JLabel.TOP);
 		
 		displayPane.setPreferredSize(new Dimension(width-500,900));
 		displayPane.setViewportView(display);
+		displayPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		displayPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		JScrollBar vertical = displayPane.getVerticalScrollBar();
+		vertical.setValue( vertical.getMaximum() );
 		
 		// create the display
 		add("Center", displayPane);
@@ -191,21 +213,28 @@ public class UprootGUI extends JFrame{
 		int textLength = display.getText().length()-7;
 		String newText = display.getText().substring(0, textLength) + "<BR><BR>" + s + "</HTML>";
 		display.setText(newText);
+		display.setPreferredSize(new Dimension(width-550,(display.getText().length()/2)));
+		displayPane.setPreferredSize(new Dimension(width-500, display.getHeight()));
 		}
 	
-	public String getDisplay(){	
-		return display.getText();
-	}
-	
+	//Method to clear the input textField
 	public void clearInput() {
 		String defaultValue = "";
 		input.setText(" ");
 		input.setText(defaultValue);
 	}
 	
-	public void addToInventory(String s) {
-		int textLength = inventory.getText().length()-7;
-		inventory.setText(inventory.getText().substring(0, textLength) + "<BR>- " + s + "</HTML>");
+	//Method to update the inventory
+	public void updateInventory(ArrayList<Item> s) {
+		if(s.isEmpty()) {
+			return;
+		}
+		String newText = "<HTML>-" + s.get(0).getName();
+		for(int i = 1; i<s.size(); i++) {
+			newText = newText +"<BR>- " + s.get(i).getName();		 
+		}
+		newText = newText + "</HTML>";
+		inventory.setText(newText);
 	}
 	
 	//Method to update the map image for the GUI
