@@ -1,28 +1,19 @@
+import java.util.ArrayList;
 
 public class Item 
 {
 	private int id;
 	private String name;
 	private String desc;
-	private int health;
-	private int attack;
-	private int location;
-	
+	private ArrayList<Integer> locations = new ArrayList<Integer>();
 	
 
-	public Item() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public Item(int id, String name, String desc, int health, int attack, int location) {
-		super();
+	public Item(int id, String name, String desc, ArrayList<Integer> location) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
-		this.health = health;
-		this.attack = attack;
-		this.location = location;
+		this.locations = location;
 	}
 
 	public int getId() {
@@ -49,28 +40,12 @@ public class Item
 		this.desc = desc;
 	}
 
-	public int getHealth() {
-		return health;
+	public ArrayList<Integer> getLocation() {
+		return locations;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-	public int getAttack() {
-		return attack;
-	}
-
-	public void setAttack(int attack) {
-		this.attack = attack;
-	}
-
-	public int getLocation() {
-		return location;
-	}
-
-	public void setLocation(int location) {
-		this.location = location;
+	public void setLocation(ArrayList<Integer> location) {
+		this.locations = location;
 	}
 
 	public void pick()
@@ -78,30 +53,26 @@ public class Item
 		
 	}
 	
-	public void drop()
-	{
-		
+	//Add to inventory for player and remove from room inventory
+	void addItem(Player p, Room r) {
+		p.getInventory().add(this);
+		r.getInventory().remove(this);
 	}
+		
+	//Add items to rooms - used to place items upon starting the game
+	void addItem(Room r) {
+		r.getInventory().add(this);
+	}
+	//Drop item from the player inventory and place into current room
+	void dropItem(Player p,Room r) {
+		r.getInventory().add(this);
+		p.getInventory().remove(this);
+	} 
 	
-	public void equipItem()
-	{
-		
-	}
-	
-	public void unequipItem()
-	{
-		
-	}
-	
-	public void consume()
-	{
-		
-	}
 	
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", desc=" + desc + ", health=" + health + ", attack=" + attack
-				+ ", location=" + location + "]";
+		return name;
 	}
 	
 	

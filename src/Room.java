@@ -13,6 +13,7 @@ public class Room {
 	private int West;
 	private int Up;
 	private int Down;
+	private int Level;
 	
 
 	private boolean prevVisited;
@@ -20,10 +21,10 @@ public class Room {
 	private Puzzle puzzle = null;
 	private Monster monster = null;
 
-	Room(int ID, String name, String description, int North, int East, int South, int West, int Up, int Down)
+	Room(int ID, String name, String description, int North, int East, int South, int West, int Up, int Down, int Level )
 	{
 		this.ID = ID; this.name = name; this.description = description;
-		this.North = North; this.East = East; this.South = South; this.West = West; this.Up = Up; this.Down = Down;
+		this.North = North; this.East = East; this.South = South; this.West = West; this.Up = Up; this.Down = Down; this.Level = Level;
 		this.prevVisited = false;
 	}
 	
@@ -70,6 +71,11 @@ public class Room {
 	//Get room Down of current room
 	int getDown() {
 		return Down;
+	}
+	
+	//Get level of current room
+	int getLevel() {
+		return Level;
 	}
 	
 	//Get Inventory

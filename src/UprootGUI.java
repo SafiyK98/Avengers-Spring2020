@@ -2,20 +2,23 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextField;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Panel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -25,6 +28,9 @@ public class UprootGUI extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private JScrollPane displayPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+		      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 	//Used to store the output for the player
 	private JLabel display = new JLabel("<HTML>Welcome to UPROOT!</HTML>");
@@ -38,8 +44,12 @@ public class UprootGUI extends JFrame{
 	
 	private JMenu menu;
 	
-	//private ImageIcon map;
-	private Component map;
+	//Used to store the image of the map
+	private JLabel map;
+	
+	//Use to hold the map image
+	private ImageIcon image;
+	
 
 
 	
@@ -48,7 +58,9 @@ public class UprootGUI extends JFrame{
 	@SuppressWarnings("deprecation")
 	public UprootGUI(){
 		super("UPROOT");
-		
+		int height =1000;
+		int width = 1000;
+		this.setSize(width, height);
 		
 		//create the menuBar
 		JMenuBar menuBar = new JMenuBar();
@@ -69,18 +81,18 @@ public class UprootGUI extends JFrame{
 		
 
 		buttons.setLayout(new GridLayout(3,4));
-		buttons.setPreferredSize(new Dimension(490,205));
+		buttons.setPreferredSize(new Dimension(490,(int) ((height-500)/2.5)));
 		
 		String[] buttonStrings = {
-				"UP", "s", "^", "s",
-				"s", "<", "s", ">",
-				"DOWN", "s", "v", "s"
+				"Up", "s", "North", "s",
+				"s", "West", "s", "East",
+				"Down", "s", "South", "s"
 		};
 		
 		for (String s: buttonStrings) {
-			Button button = new Button(s);
+			JButton button = new JButton(s);
 			if(s.equalsIgnoreCase("s")) {
-				button = new Button(" ");
+				button = new JButton(" ");
 				button.disable();
 			}
 			button.setBackground(Color.DARK_GRAY);
@@ -90,19 +102,19 @@ public class UprootGUI extends JFrame{
 		
 		File f = new File("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor1.png");
 		
-		JLabel floor1 = new JLabel(new ImageIcon(f.getName()));
-		map = floor1;
-		map.setPreferredSize(new Dimension(490,500));
+		image = new ImageIcon(f.getName());
+		map = new JLabel(image);
+		map.setPreferredSize(new Dimension(490, 500));
 	
 		
 		Border border = LineBorder.createBlackLineBorder();
 		
 		inventory.setOpaque(true);
-		inventory.setPreferredSize(new Dimension(490,230));
+		inventory.setPreferredSize(new Dimension(490, (int) ((height-500)/2.7)));
 		inventory.setBackground(Color.WHITE);
 		inventory.setAlignmentY(TOP_ALIGNMENT);
 		inventory.setBorder(border);
-		inventory.setVerticalTextPosition(JLabel.TOP);
+		inventory.setVerticalAlignment(JLabel.TOP);
 		
 		Panel sidePanel = new Panel();
 		sidePanel.setPreferredSize(new Dimension(500,800));
@@ -115,19 +127,38 @@ public class UprootGUI extends JFrame{
 		
 		
 		//Create the textfield box for player
-		input.setPreferredSize(new Dimension(100, 100));
+		input.setPreferredSize(new Dimension(50, 50));
 	
 		display.setOpaque(true);
 		display.setBackground(Color.WHITE);
-		display.setPreferredSize(new Dimension(1000,1000));
 		display.setBorder(border);
-		display.setVerticalTextPosition(JLabel.TOP);
+		display.setPreferredSize(new Dimension(width-500, 900));
+		display.setVerticalAlignment(JLabel.TOP);
+		
+		displayPane.setPreferredSize(new Dimension(width-500,900));
+		displayPane.setViewportView(display);
 		
 		// create the display
-		add("Center", display);
+		add("Center", displayPane);
 		add("South", input);
 		add("East", sidePanel);
 		
+		input.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			 
+			@Override
+			public void keyPressed(KeyEvent e) {;
+			} 
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					clearInput();
+				}
+			}
+		});
+
 	
 		
 	}
@@ -137,8 +168,8 @@ public class UprootGUI extends JFrame{
 	public void registerListener(UprootController controller) {
 		Component[] components = buttons.getComponents(); 
 		for (Component component : components) {
-			if (component instanceof AbstractButton) {
-				AbstractButton button = (AbstractButton) component;
+			if (component instanceof JButton) {
+				JButton button = (JButton) component;
 				button.addActionListener(controller);
 			}
 		}
@@ -158,15 +189,30 @@ public class UprootGUI extends JFrame{
 	//display the new output to the player in the JLabel	
 	public void setDisplay(String s){ 
 		int textLength = display.getText().length()-7;
-		display.setText(display.getText().substring(0, textLength) + "<BR><BR>" + s + "</HTML>");
+		String newText = display.getText().substring(0, textLength) + "<BR><BR>" + s + "</HTML>";
+		display.setText(newText);
 		}
-	public String getDisplay()
-	{	return display.getText();
+	
+	public String getDisplay(){	
+		return display.getText();
+	}
+	
+	public void clearInput() {
+		String defaultValue = "";
+		input.setText(" ");
+		input.setText(defaultValue);
 	}
 	
 	public void addToInventory(String s) {
 		int textLength = inventory.getText().length()-7;
 		inventory.setText(inventory.getText().substring(0, textLength) + "<BR>- " + s + "</HTML>");
+	}
+	
+	//Method to update the map image for the GUI
+	public void updateImage(int level) {
+		File f = new File("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor"+level+".png");
+		image = new ImageIcon(f.getName());
+		map.setIcon(image);
 	}
 	
 	public static class CloseListener extends WindowAdapter

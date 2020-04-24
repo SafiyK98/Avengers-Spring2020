@@ -8,13 +8,10 @@ public class UprootController implements ActionListener{
 	
 	private UprootGUI view;
 	
-	private boolean newGame = true;
 	
-	
-	public UprootController(UprootModel model, UprootGUI view) {
+	public UprootController(UprootModel model, UprootGUI view){
 		this.model = model;
 		this.view = view;
-		
 		startGame();
 
 		
@@ -30,43 +27,34 @@ public class UprootController implements ActionListener{
 		model.gameDescription();
 		view.setDisplay(model.getValue());
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.equals("Exit")) {
 			System.exit(0);
 		} else if (command.contentEquals("Start New Game")) {
 			model = new UprootModel();
-			view.setDisplay(model.getValue());
 		} else if (command.contentEquals("Save Game")) {
 			model.saveGame();
-		} else if (command.contentEquals("UP")) {
+		} else if (command.equals("Up")) {
 			model.moveUp();
-			view.setDisplay(model.getValue());
-		} else if (command.contentEquals("DOWN")) {
+		} else if (command.equals("Down")) {
 			model.moveDown();
-			view.setDisplay(model.getValue());
-		} else if (command.contentEquals("^")) {
+		} else if (command.equals("North")) {
 			model.moveNorth();
-			view.setDisplay(model.getValue());
-		} else if (command.contentEquals(">")) {
+		} else if (command.equals("East")) {
 			model.moveEast();
-			view.setDisplay(model.getValue());
-		} else if (command.contentEquals("v")) {
+		} else if (command.equals("South")) {
 			model.moveSouth();
-			view.setDisplay(model.getValue());
-		} else if (command.contentEquals("<")) {
+		} else if (command.equals("West")) {
 			model.moveWest();
-			view.setDisplay(model.getValue());
-		} else if (newGame == true){
+		} else if (model.newGame == true){
 			model.createPlayer(command);
-			view.setDisplay(model.getValue());
-			newGame = false;
-			model.gameDescription();
-			view.setDisplay(model.getValue());
+			model.newGame = false;
 		} else {
 			model.applyCommand(command);
-			view.setDisplay(model.getValue());
 		}
+		view.setDisplay(model.getValue());
+		view.updateImage(model.getRoomLevel());
 	}
-
 }

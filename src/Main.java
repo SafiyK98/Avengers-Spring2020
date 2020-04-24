@@ -11,7 +11,6 @@ public class Main {
 		view.registerListener(controller);
 		
 		view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		view.setSize(1500,1200);
 		view.setLocation(100, 0);
 		view.setVisible(true);
 		

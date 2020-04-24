@@ -5,9 +5,15 @@ public class UprootModel {
 	//This is the current line of text to display to the player
 	private String displayValue;
 	
+	//This will be set to false if the player is continuing a saved game
+	public boolean newGame = true;
+	
 	
 	//This hashmap will store the rooms
 	private Game game;
+	
+	//This will store the current level the player is on to change the map
+	private int roomLevel = 1;
 
 	
 	
@@ -38,14 +44,26 @@ public class UprootModel {
 	
 	//Method to create new player
 	public void createPlayer(String name) {
-		displayValue = "Welcome " + name +"! Today, you will be known as Prince and the King's Eldest son.";
 		game.setPlayer(new Player(1, name, 100, 1));
+		displayValue = "Welcome " + name +"! Today, you will be known as Prince and the King's Eldest son.";
+		displayValue = displayValue.substring(0, displayValue.length()-7) + "<BR><BR>" + game.displayDescription();
+		displayValue = displayValue.substring(0, displayValue.length()-7) + "<BR><BR>" + game.startGame();
+	}
+	
+	//Method to place player in their current location and begin game
+	public void startGame() {
+		displayValue = game.startGame();
 	}
 	
 	
 	//Method to display text to player
 	public String getValue() {
 		return displayValue;
+	}
+	
+	//Method to get the room level
+	public int getRoomLevel() {
+		return roomLevel;
 	}
 	
 	//Method for model to save game
@@ -56,36 +74,42 @@ public class UprootModel {
 	//Method for model to move up
 	public void moveUp() {
 		displayValue = game.moveUp();
+		roomLevel = game.getRoomLevel();
 	}
 	
 	//Method for model to move down
 	public void moveDown() {
 		displayValue = game.moveDown();
+		roomLevel = game.getRoomLevel();
 	}
 	
 	//Method for model to move north
 	public void moveNorth() {
 		displayValue = game.moveNorth();
+		roomLevel = game.getRoomLevel();
 	}
 	
 	//Method for model to move east
 	public void moveEast() {
 		displayValue = game.moveEast();
+		roomLevel = game.getRoomLevel();
 	} 
 	
 	//Method for model to move south
 	public void moveSouth() {
 		displayValue = game.moveSouth();
+		roomLevel = game.getRoomLevel();
 	}
 	
 	//Method for model to move west
 	public void moveWest() {
 		displayValue = game.moveWest();
+		roomLevel = game.getRoomLevel();
 	}
 	
 	//Method for model to apply text command from player
-	public void applyCommand(String text) {
-		displayValue = game.applyCommand(text);
+	public void applyCommand(String command) {
+		displayValue = game.applyCommand(command);
 	}
 	
 }
