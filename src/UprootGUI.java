@@ -56,8 +56,6 @@ public class UprootGUI extends JFrame{
 	
 	int height= 850;
 	int width = 1000;
-
-
 	
 	
 	//Creates the panel and components for the JFrame
@@ -99,7 +97,7 @@ public class UprootGUI extends JFrame{
 				button = new JButton(" ");
 				button.disable();
 			}
-			button.setBackground(Color.DARK_GRAY);
+			button.setBackground(Color.WHITE);
 			buttons.add(button);
 
 		}

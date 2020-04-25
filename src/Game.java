@@ -340,7 +340,7 @@ public class Game {
 //			getHelp();
 		}
 		
-		else if(text.equalsIgnoreCase("Search")) {
+		else if(text.equalsIgnoreCase("Explore")) {
 			response = searchRoom(player.getLocation());
 		}
 		

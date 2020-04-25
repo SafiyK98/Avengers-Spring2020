@@ -2,3 +2,5 @@ North
 East
 South
 West
+Up
+Down
