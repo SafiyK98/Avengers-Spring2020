@@ -1,7 +1,7 @@
 1,Fish, Delicious fish! How did this get in a fountain though?,20,1,2:22
 2,Mutton, A leg of mutton; sheep is healthy for you.,30,1,8:29:22
-3,Iron Fence Post, The post from a graveyard fence can be pulled off.,10,0,0
-4,Wood Planks, Wood planks lie on a grave; can be used as a last resort if you have no weapons.,5,0,0
+3,Iron Fence Post, The post from a graveyard fence can be pulled off.,10,0,100
+4,Wood Planks, Wood planks lie on a grave; can be used as a last resort if you have no weapons.,5,0,100
 5,Spell scroll, A rare and strange magical scroll whose contents are unreadable. If used during battle Zombie�s Health Points will be reduced to 0.,100,0,27:21
 6,Gold Soap, A beautiful bar of soap; though not very practical. A decorative item that serves no purpose in battle.,0,0,18
 7,Wine, Good for the heart.,15,1,31:27:30:13:22

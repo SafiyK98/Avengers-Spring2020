@@ -13,6 +13,7 @@ public class Puzzle
 	private String solution;
 	private int locationOpen;
 	private int locationPlaced;
+	private boolean solved;
 	
 	public Puzzle(int iD, String description, String hint, String solution, int locationOpen, int locationPlaced) {
 		super();
@@ -22,6 +23,7 @@ public class Puzzle
 		this.solution = solution;
 		this.locationOpen = locationOpen;
 		this.locationPlaced = locationPlaced;
+		solved = false;
 	}
 
 
@@ -90,6 +92,16 @@ public class Puzzle
 		this.solution = solution;
 	}
 
+	public boolean getSolve() {
+		return solved;
+	}
+	
+	public void setSolved(String b) {
+		if(b.equals("true"))
+			solved = true;
+		else
+			solved = false;
+	}
 
 	@Override
 	public String toString() {

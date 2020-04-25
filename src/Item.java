@@ -6,6 +6,7 @@ public class Item
 	private String name;
 	private String desc;
 	private ArrayList<Integer> locations = new ArrayList<Integer>();
+	private int locationPlaced;
 	
 
 
@@ -47,12 +48,21 @@ public class Item
 	public void setLocation(ArrayList<Integer> location) {
 		this.locations = location;
 	}
+	
+	int getLocationPlaced() {
+		return locationPlaced;
+	}
+	
+	void setLocationPlaced(int i) {
+		locationPlaced = i;
+	}
 
 	//Add item to room inventory used at the start of the game
 	void addItem(Room r) {
 		ArrayList<Item> rm = r.getInventory();
 		rm.add(this);
 		r.setInventory(rm);
+		setLocationPlaced(r.getID());
 	}
 	
 	//Add to inventory for player and remove from room inventory
@@ -63,16 +73,15 @@ public class Item
 		rm.remove(this);
 		p.setInventory(in);
 		r.setInventory(rm);
+		setLocationPlaced(-1);
 	}
 	
 	//Drop item from the player inventory and place into current room
-	void dropItem(Player p,Room r) {
+	void dropItem(Player p) {
 		ArrayList<Item> in = p.getInventory();
-		ArrayList<Item> rm = r.getInventory();
 		in.remove(this);
-		rm.add(this);
 		p.setInventory(in);
-		r.setInventory(rm);
+		setLocationPlaced(0);
 	} 
 	
 	

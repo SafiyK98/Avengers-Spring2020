@@ -5,6 +5,7 @@ public class Monster extends Entity{
 	private int minAttack;
 	private int maxAttack;
 	private ArrayList<Integer> locations;
+	private int locationPlaced = 0;
 	
 	Monster(int ID, String name, String description, int HP, int minAttack, int maxAttack, ArrayList<Integer> locations)
 	{
@@ -40,6 +41,18 @@ public class Monster extends Entity{
 	//Get location
 	ArrayList<Integer> getLocation() {
 		return locations;
+	}
+	
+	public void setLocations(ArrayList<Integer> loc) {
+		locations = loc;
+	}
+	
+	int getLocationPlaced() {
+		return locationPlaced;
+	}
+	
+	void setLocationPlaced(int i) {
+		locationPlaced = i;
 	}
 	
 	//Monster attack player

@@ -32,7 +32,7 @@ public class Game {
 	String description;
 	
 	
-	
+	//Create a new game from the files
 	Game(File rooms, File items, File puzzles, File monsters, File helpCommands, File description)
 	{
 		//Read all of the files
@@ -43,13 +43,30 @@ public class Game {
 		readHelpCommands(helpCommands);
 		readDescription(description);
 		
-		//Set the location for the items
+		//Set the location for all objects
 		setStartingIDItems();
 		setPuzzles();
-		setStartingIDMonsters();
-		
-		
+		setStartingLocMonsters();		
 	}
+	
+	//Create a saved game from Strings
+	Game(File rooms, File items, File puzzles, File monsters, File helpCommands, File description, String name, String info){
+		//Read all of the files
+		readRooms(rooms);
+		readItems(items);
+		readPuzzles(puzzles);
+		readMonsters(monsters);
+		readHelpCommands(helpCommands);
+		readDescription(description);
+		
+		readInfo(name, info);
+		
+		//Set the location for all objects after adjusting their locations
+		setStartingIDItems();
+		setPuzzles();
+		setStartingLocMonsters();
+	}
+	
 	
 	//Method to read the rooms text file
 	void readRooms(File rooms) {
@@ -84,6 +101,7 @@ public class Game {
 			
 		  }
 	}
+	
 	
 	//Method to read the items file
 	void readItems(File items) {
@@ -180,6 +198,7 @@ public class Game {
 			Monster mon = new Monster(id, name, desc, HP, min, max, location);
 			hmMonsters.put(mon.getID(),mon);
 			}
+		System.out.print(hmMonsters);
 		}
 	
 	//Method to read the helpCommands file
@@ -207,14 +226,91 @@ public class Game {
 		}
 	}
 	
+	//Method to read info for saved game
+	void readInfo(String name, String info) {
+		String[] strParts = info.split("/");
+		//Read all relevant info to change for saved game
+		readPuzzleInfo(strParts[1]);
+		readMonsterInfo(strParts[2]);
+		readItemInfo(strParts[3]);
+		
+		player = new Player(1, name, 100, 1);
+		String[] playerParts = strParts[0].split(";");
+		int HP = Integer.parseInt(playerParts[0]);
+		player.setHP(HP);
+		int location = Integer.parseInt(playerParts[1]);
+		player.setLocation(location);
+		ArrayList<Equipable> eq = new ArrayList<Equipable>();
+		String[] equippedItems = playerParts[2].split("&");
+		for(int i = 0; i<equippedItems.length; i++) {
+			int itemId = Integer.parseInt(equippedItems[i]);
+			eq.add((Equipable) hmItems.get(itemId));
+		}
+		player.setEquipped(eq);
+	}
+	
+	//Method to read puzzle info for saved game
+	void readPuzzleInfo(String info) {
+		String[] puzzles = info.split(";");
+		for(int i = 0; i<puzzles.length; i++) {
+			String[] puzzleParts = puzzles[i].split("&");
+			int ID = Integer.parseInt(puzzleParts[0]);
+			Puzzle puzzle = hmPuzzles.get(ID);
+			String s = puzzleParts[1];
+			puzzle.setSolved(s);
+			int location = Integer.parseInt(puzzleParts[2]);
+			puzzle.setLocationPlaced(location);
+		}
+	}
+	
+	//Method to read monster info for saved game
+	void readMonsterInfo(String info) {
+		String[] monsters = info.split(";");
+		for(int i = 0; i<monsters.length; i++) {
+			String[] monsterParts = monsters[i].split("&");
+			int ID = Integer.parseInt(monsterParts[0]);
+			Monster monster = hmMonsters.get(ID);
+			int HP = Integer.parseInt(monsterParts[1]);
+			monster.setHP(HP);
+			ArrayList<Integer> locations = new ArrayList<Integer>();
+			int location = Integer.parseInt(monsterParts[2]);
+			locations.add(location);
+			monster.setLocations(locations);
+		}
+	}
+	
+	//Method to read items info for saved game
+	void readItemInfo(String info) {
+		String[] items = info.split(";");
+		for(int i = 0; i<items.length; i++) {
+			String[] itemParts = items[i].split("&");
+			int ID = Integer.parseInt(itemParts[0]);
+			Item item = hmItems.get(ID);
+			ArrayList<Integer> locations = new ArrayList<Integer>();
+			int location = Integer.parseInt(itemParts[1]);
+			locations.add(location);
+			item.setLocation(locations);
+		}
+	}
+	
+	
+	
 	//Method to set the starting ID for the items
 	void setStartingIDItems() {	
 		for(int i =1; i<=hmItems.size(); i++) {
 			ArrayList<Integer> locations = hmItems.get(i).getLocation();
 			if(locations.size() == 1) {
-				if(locations.get(0)==0) {
+				if(locations.get(0)==100) {
 					int rand = (int)(Math.random()*(31-1))+1;
 					hmItems.get(i).addItem(hmRooms.get(rand));
+				}
+				else if(locations.get(0)==0) {
+					continue;
+				}
+				else if(locations.get(0) == -1) {
+					ArrayList<Item> pInventory = player.getInventory();
+					pInventory.add(hmItems.get(i));
+					player.setInventory(pInventory);
 				}
 				else {
 					hmItems.get(i).addItem(hmRooms.get(locations.get(0)));
@@ -231,21 +327,32 @@ public class Game {
 	void setPuzzles() {
 		for(int i =1; i<=hmPuzzles.size(); i++) {
 			int location = hmPuzzles.get(i).getLocationPlaced();
-			hmRooms.get(location).setPuzzle(hmPuzzles.get(i));
+			if(location == 0)
+				continue;
+			else
+				hmRooms.get(location).setPuzzle(hmPuzzles.get(i));
 		}
 	}
 	
 	
 	//Method to set the starting ID for the monsters
-	void setStartingIDMonsters() {	
+	void setStartingLocMonsters() {	
 		for(int i =1; i<=hmMonsters.size(); i++) {
 			ArrayList<Integer> locations = hmMonsters.get(i).getLocation();
 			if(locations.size() == 1) {
-				hmRooms.get(locations.get(0)).setMonster(hmMonsters.get(i));
+				if(locations.get(0)==0)
+					continue;
+				else {
+					hmRooms.get(locations.get(0)).setMonster(hmMonsters.get(i));
+					hmMonsters.get(i).setLocationPlaced(locations.get(0));
+				}
 			}
 			else {
 				int rand = (int)(Math.random()*(locations.size()-1));
+				System.out.println(i);
+				System.out.println(hmMonsters.get(i));
 				hmRooms.get(rand).setMonster(hmMonsters.get(i));
+				hmMonsters.get(i).setLocationPlaced(locations.get(rand));
 			}	
 		}
 	}
@@ -522,7 +629,7 @@ public class Game {
 			}
 			if(yes == true) {
 				Item item = items.get(j);
-				item.dropItem(player, room);
+				item.dropItem(player);
 				return items.get(j).getName() + " has been dropped successfully from the player inventory and placed in the " + room.getName();
 				
 			}
@@ -607,5 +714,46 @@ public class Game {
 				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
 				}
 			}
+		
+		
+		
+		
+		
+		//Method to save the game
+		String saveGame() {
+			String info = "";
+			
+			//Add player info
+			info = info + player.getName() +":" + player.getHP() + ";" + player.getLocation() + ";";
+			ArrayList<Equipable> eq = player.getEquipped();
+			for(int i = 1; i<eq.size(); i++) {
+				info = info + eq.get(i).getId() + "&";
+			}
+			info = info + eq.get(0).getId() + "/";
+			
+			//Add puzzle info
+			for(int i = 1; i<hmPuzzles.size(); i++) {
+				info = info + hmPuzzles.get(i).getID() + "&" + hmPuzzles.get(i).getSolve() + "&" + hmPuzzles.get(i).getLocationPlaced() + ";";
+			}
+			info = info + hmPuzzles.get(hmPuzzles.size()).getID() + "&" + hmPuzzles.get(hmPuzzles.size()).getSolve() + "&" + hmPuzzles.get(hmPuzzles.size()).getLocationPlaced();
+			info = info+ "/";
+			
+			//Add monster info
+			for(int i = 1; i<hmMonsters.size(); i++) {
+				info = info + hmMonsters.get(i).getID() + "&" + hmMonsters.get(i).getHP() + "&" + hmMonsters.get(i).getLocationPlaced() + ";";
+			}
+			System.out.print(hmMonsters.size());
+			info = info + hmMonsters.get(hmMonsters.size()).getID() + "&" + hmMonsters.get(hmMonsters.size()).getHP() + "&" + hmMonsters.get(hmMonsters.size()).getLocationPlaced();
+			info = info+ "/";
+			
+			//Add item info
+			for(int i = 1; i<hmItems.size(); i++) {
+				int location = hmItems.get(i).getLocationPlaced();
+				info = info + hmItems.get(i).getId() + "&" + location + ";";
+			}
+			info = info + hmItems.get(hmItems.size()).getId() + "&" + hmItems.get(hmItems.size()).getLocationPlaced();
+			
+			return info;
+		}
 
 }
