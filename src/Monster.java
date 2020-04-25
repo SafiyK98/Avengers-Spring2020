@@ -1,16 +1,17 @@
+import java.util.ArrayList;
 
 public class Monster extends Entity{
 
 	private int minAttack;
 	private int maxAttack;
-	private int location;
+	private ArrayList<Integer> locations;
 	
-	Monster(int ID, String name, String description, int HP, int minAttack, int maxAttack, int location)
+	Monster(int ID, String name, String description, int HP, int minAttack, int maxAttack, ArrayList<Integer> locations)
 	{
 		super(ID, name, description, HP);
 		this.minAttack = minAttack;
 		this.maxAttack = maxAttack;
-		this.location = location;
+		this.locations = locations;
 	}
 	
 	
@@ -37,13 +38,8 @@ public class Monster extends Entity{
 
 
 	//Get location
-	int getLocation() {
-		return location;
-	}
-	
-	//Set location
-	void setLocation(int location) {
-		this.location = location;
+	ArrayList<Integer> getLocation() {
+		return locations;
 	}
 	
 	//Monster attack player
@@ -56,7 +52,6 @@ public class Monster extends Entity{
 	//Kill monster
 	void killMonster() {
 		HP = 0;
-		location = 0;
 	}
 	
 	

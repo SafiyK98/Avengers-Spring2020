@@ -1,30 +1,32 @@
-Explore: Allows the player to see the items, monster(s), and puzzles within the current room
-Room Description: Gives the player a description of the room
-Status: This will display the players current HP.
+Help Commands:
 
+Explore: 		Allows the player to see the items, monster(s), and puzzles within the current room
+Room Description: 	Gives the player a description of the room
+Status: 		This will display the players current HP.
 
 -Interact with Items-
-Pick Up + (item name): Allows the player to pick up an item from the current room and put it in there inventory.
-Drop + (item name): Allows the player drop an item from there current inventory.
-Examine + (item name): Gives the player a description of the item
-Consume + (item name): The player uses up an item from their inventory
-Equip + (item name): Allows the player to equip the current item. Adjusts the players stats accordingly
-Unequip + (item name): Removes the item from the player and adjusts the players stats accordingly
 
--Interact with Monster-
-Stats: Displays the monsters name, description, and HP.
-Attack: Deals damage to the monster 
-Abandon Fight: Gives the player a 50% chance of abandoning the fight. This abandons progress in current battle
-Consume: see "Interact with Items"
-Equip: see "Interact with Items"
-Unequip: see "Interact with Items"
+Pick Up + (item name): 	Allows the player to pick up an item from the current room and put it in there inventory.
+Drop + (item name):	Allows the player drop an item from there current inventory.
+Examine + (item name): 	Gives the player a description of the item
+Consume + (item name): 	The player uses up an item from their inventory
+Equip + (item name): 	Allows the player to equip the current item. Adjusts the players stats accordingly
+Unequip + (item name): 	Removes the item from the player and adjuststhe players stats accordingly
 
 -Interact with Puzzles-
-Explore puzzle: Allows the player to enter puzzle mode
-Hint: Gives the player a hint for the puzzle
-(puzzle answer): Valid responses that can be typed during puzzle mode
 
+Explore puzzle: 	Allows the player to enter puzzle mode
+Hint:		Gives the player a hint for the puzzle
+(puzzle answer):	Valid responses that can be typed during puzzle mode
+Start new game:	Allows the user to start from the beginning
+Load Game:		Allows the user to load a character from before
+Exit:		Closes the game at any point
 
-Start new game: Allows the user to start from the beginning
-Load Game: Allows the user to load a character from before
-Exit: Closes the game at any point
+-Interact with Monster-
+
+Stats:		Displays the monsters name, description, and HP.
+Attack: 		Deals damage to the monster 
+Abandon Fight: 	Gives the player a 50% chance of abandoning the fight. This abandons progress in current battle
+Consume: 		See "Interact with Items"
+Equip:		See "Interact with Items"
+Unequip: 		See "Interact with Items"

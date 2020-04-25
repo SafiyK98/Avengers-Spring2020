@@ -1,31 +1,31 @@
-1, Bridge Landing, A narrow bridge towers the ocean and faces you at a majestic castle.,2,0,0,0,0,0,1
-2, Entrance Room, The entrance to the castle lies at the end of a long bridge. The interior is white marble. In front of you are two fountains.,0,3,1,9,0,0,1
-3, SE1, A circular room in the southeast quadrant of the first floor of the castle.,8,0,0,2,17,0,1
-4, Dining Room 2, A dining room on the west side of the castle.,7,0,9,0,12,0,1
-5, NE1, A circular room in the northeast quadrant of the first floor of the castle.,0,0,8,6,15,0,1
-6, Throne Room, Two thrones face you in a wide room. There are portraits of past kings on the wall; however none are bigger than that of the current heir.,0,5,0,7,14,0,1
-7, NW1, A circular room in the northwest quadrant of the first floor of the castle.,0,6,4,0,13,0,1
-8, Dining Room 1, A dining room hosts a large table for guests. Behind the table is a door with a jester guarding it. He seems excited to socialize.,5,26,3,0,16,0,1
-9, SW1, A room sits in the southwest quadrant of the castle.,4,2,0,0,11,0,1
-10, Shield Room, A room hosting a variety of shields sits directly above the entrance of the castle on the second floor.  This shield looks loose...,0,17,0,11,18,2,2
-11, SW2, An empty room sits on the second floor in the southeast corner overlooking the sea. There are no occupants.,12,10,0,0,19,9,2
-12, Armory 2, An armory hosts a variety of weapons.,13,0,11,0,20,4,2
-13, NW2, The armory has overflowed to consume this room as well. This castle looks well protected.,0,14,12,0,20,7,2
-14, Sword Room, The north area of the armory overlooks the grass. A door can be seen through a stained glass window.,0,15,0,13,22,6,2
-15, NE2, An empty room sits on the northeast quadrant of the second floor of the castle.,0,0,16,14,23,5,2
-16, Armory 1, An empty bed sits in the room. There are weapons on the wall that would likely intimidate guests. A stained-glass window overlooks an outdoor corridor with the family crest. In the distance to the northeast is an ominous fog.,15,0,17,0,8,24,2
-17, SE2, An empty room sits in the corner.,16,0,0,10,25,3,2
-18, Restroom, The only restroom in the castle overlooks a bridge; there is a gold bar on the sink. Could it be soap?,0,25,0,19,0,10,3
-19, SW3, This room is the highest room in the castle that overlooks the ocean and the farthest from the graveyard. Dolphins can be seen skimming the coast. This room has an odd serenity about it...,20,18,0,0,0,13,3
-20, Bedroom 2, Another spare bedroom occupies the third floor of the tower yet no one seems to come visit. ,21,0,19,0,0,12,3
-21, NW3, A small corner room overlooks a rocky coast. The smell of Irish Spring soap fills the air.,0,22,20,0,0,13,3
-22, King's Bedroom, The King's Bedroom overlooks the wine cellar an open coast and the graveyard. What are his interests? The bed is made of fine linens.,0,23,0,21,0,14,3
-23, NE3, A room overlooks a graveyard. A wrought iron fence hugs the terrain. Two pink-tinted marble cubes overlook the rested souls; atop each is a statue of the Black Knight and the White Knight.,0,0,24,21,0,15,3
-24, Bedroom 1, The east passageway from the side of the castle is clearly seen. This path leads from the east side of the castle to the graveyard.,23,0,25,0,0,16,3
-25, SE3, A corner castle overlooks the curvature of the earth. Nothing but rocky coasts and green grass for miles.,24,0,0,18,0,14,3
-26, East Hall, A corridor stretches from the east side of the building going north. The hall is a long building with marble walls and ceilings. Flags drape the sides and a crest lies atop. A tile is loose and it looks like you may fall through to underground.,28,0,0,8,0,27,1
-27, Dungeon, A dungeon is under the East Hall! There are wrought-iron cages that are no longer occupied. Cages hang from the ceiling look like they could host go-go dancers.,0,0,0,0,26,0,0
-28, Graveyard, A graveyard hosts rows of graves. The graves are from hundreds of years old to empty... At the end of the grave lies three distinct graves. Should you approach them?,0,29,26,0,0,0,1
-29, Mausoleum 1, The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,0,0,30,28,0,0,1
-30, Mausoleum 2, The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,29,0,0,0,0,31,1
-31, Wine Cellar, The lock to the wine cellar looks suspiciously like the key you found in the mausoleum after the kind ghost let you enter.,0,0,0,0,0,0,0
+1,Bridge Landing,A narrow bridge towers the ocean and faces you at a majestic castle.,2,0,0,0,0,0,1
+2,Entrance Room,The entrance to the castle lies at the end of a long bridge. The interior is white marble. In front of you are two fountains.,0,3,1,9,0,0,1
+3,SE1,A circular room in the southeast quadrant of the first floor of the castle.,8,0,0,2,17,0,1
+4,Dining Room 2,A dining room on the west side of the castle.,7,0,9,0,12,0,1
+5,NE1,A circular room in the northeast quadrant of the first floor of the castle.,0,0,8,6,15,0,1
+6,Throne Room,Two thrones face you in a wide room. There are portraits of past kings on the wall; however none are bigger than that of the current heir.,0,5,0,7,14,0,1
+7,NW1,A circular room in the northwest quadrant of the first floor of the castle.,0,6,4,0,13,0,1
+8,Dining Room 1,A dining room hosts a large table for guests. Behind the table is a door with a jester guarding it. He seems excited to socialize.,5,26,3,0,16,0,1
+9,SW1,A room sits in the southwest quadrant of the castle.,4,2,0,0,11,0,1
+10,Shield Room,A room hosting a variety of shields sits directly above the entrance of the castle on the second floor.  This shield looks loose...,0,17,0,11,18,2,2
+11,SW2,An empty room sits on the second floor in the southeast corner overlooking the sea. There are no occupants.,12,10,0,0,19,9,2
+12,Armory 2,An armory hosts a variety of weapons.,13,0,11,0,20,4,2
+13,NW2,The armory has overflowed to consume this room as well. This castle looks well protected.,0,14,12,0,20,7,2
+14,Sword Room,The north area of the armory overlooks the grass. A door can be seen through a stained glass window.,0,15,0,13,22,6,2
+15,NE2,An empty room sits on the northeast quadrant of the second floor of the castle.,0,0,16,14,23,5,2
+16,Armory 1,An empty bed sits in the room. There are weapons on the wall that would likely intimidate guests. A stained-glass window overlooks an outdoor corridor with the family crest. In the distance to the northeast is an ominous fog.,15,0,17,0,8,24,2
+17,SE2,An empty room sits in the corner.,16,0,0,10,25,3,2
+18,Restroom,The only restroom in the castle overlooks a bridge; there is a gold bar on the sink. Could it be soap?,0,25,0,19,0,10,3
+19,SW3,This room is the highest room in the castle that overlooks the ocean and the farthest from the graveyard. Dolphins can be seen skimming the coast. This room has an odd serenity about it...,20,18,0,0,0,13,3
+20,Bedroom 2,Another spare bedroom occupies the third floor of the tower yet no one seems to come visit. ,21,0,19,0,0,12,3
+21,NW3,A small corner room overlooks a rocky coast. The smell of Irish Spring soap fills the air.,0,22,20,0,0,13,3
+22,King's Bedroom,The King's Bedroom overlooks the wine cellar an open coast and the graveyard. What are his interests? The bed is made of fine linens.,0,23,0,21,0,14,3
+23,NE3,A room overlooks a graveyard. A wrought iron fence hugs the terrain. Two pink-tinted marble cubes overlook the rested souls; atop each is a statue of the Black Knight and the White Knight.,0,0,24,21,0,15,3
+24,Bedroom 1,The east passageway from the side of the castle is clearly seen. This path leads from the east side of the castle to the graveyard.,23,0,25,0,0,16,3
+25,SE3,A corner castle overlooks the curvature of the earth. Nothing but rocky coasts and green grass for miles.,24,0,0,18,0,14,3
+26,East Hall,A corridor stretches from the east side of the building going north. The hall is a long building with marble walls and ceilings. Flags drape the sides and a crest lies atop. A tile is loose and it looks like you may fall through to underground.,28,0,0,8,0,27,1
+27,Dungeon,A dungeon is under the East Hall! There are wrought-iron cages that are no longer occupied. Cages hang from the ceiling look like they could host go-go dancers.,0,0,0,0,26,0,0
+28,Graveyard,A graveyard hosts rows of graves. The graves are from hundreds of years old to empty... At the end of the grave lies three distinct graves. Should you approach them?,0,29,26,0,0,0,1
+29,Mausoleum 1,The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,0,0,30,28,0,0,1
+30,Mausoleum 2,The mausoleum is elegant. Pinkish Italian marble composes a large cube; upon closer inspection it looks to have gold flakes. Atop are two guardians; a statue of the Black Knight and a statue of the White Knight. Dare you see who occupies it?,29,0,0,0,0,31,1
+31,Wine Cellar,The lock to the wine cellar looks suspiciously like the key you found in the mausoleum after the kind ghost let you enter.,0,0,0,0,0,0,0

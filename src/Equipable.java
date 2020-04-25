@@ -19,13 +19,22 @@ public class Equipable extends Item{
 	}
 	
 
-	public void equipItem()
-	{
-		
+	//Method for player to equip items 
+	void equip(Player p) {
+		ArrayList<Equipable> eq = p.getEquipped();
+		ArrayList<Item> in = p.getInventory();
+		eq.add(this);
+		in.remove(this);
+		p.setEquipped(eq);
+		p.setInventory(in);
 	}
-	
-	public void unequipItem()
-	{
-		
+	//Method for player to unequip items
+	void unequip(Player p) {
+		ArrayList<Equipable> eq = p.getEquipped();
+		ArrayList<Item> in = p.getInventory();
+		eq.remove(this);
+		in.add(this);
+		p.setEquipped(eq);
+		p.setInventory(in);
 	}
 }

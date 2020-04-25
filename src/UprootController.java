@@ -56,7 +56,6 @@ public class UprootController implements ActionListener{
 			view.updateInventory(model.getInventory());
 		}
 		view.setDisplay(model.getValue());
-		view.updateImage(model.getRoomLevel());
-		
+		view.updateImage(model.getRoomLevel());	
 	}
 }

@@ -20,8 +20,12 @@ public class Consumable extends Item{
 	}
 	
 
-	public void consume()
-	{
-		
+	public void consume(Player p){
+		int currentHealth = p.getHP();
+		int newHealth = currentHealth + healthIncrease;
+		if(newHealth>100) {
+			newHealth = 100;
+		}
+		p.setHP(newHealth);
 	}
 }

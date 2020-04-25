@@ -22,6 +22,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -35,16 +36,16 @@ public class UprootGUI extends JFrame{
 	private JScrollPane displayPane = new JScrollPane();
 
 	//Used to store the output for the player
-	private JLabel display = new JLabel("<HTML>Welcome to UPROOT!</HTML>");
+	private JTextArea display = new JTextArea("Welcome to UPROOT!");
 	
 	//Used to take input from the player
 	private TextField input = new TextField();
 	
 	private Panel buttons = new Panel();
 	
-	private JLabel inventoryLabel = new JLabel("<HTML>Player Inventory:</HTML>");
+	private JTextArea inventoryLabel = new JTextArea("Player Inventory:");
 	
-	private JLabel inventory = new JLabel("");
+	private JTextArea inventory = new JTextArea("");
 	
 	private JMenu menu;
 	
@@ -120,13 +121,12 @@ public class UprootGUI extends JFrame{
 		inventoryLabel.setPreferredSize(new Dimension(490, 20));
 		inventoryLabel.setBackground(Color.WHITE);
 		inventoryLabel.setBorder(border);
-		inventoryLabel.setVerticalAlignment(JLabel.TOP);
 		
 		inventory.setOpaque(true);
 		inventory.setPreferredSize(new Dimension(500, (int) ((height-500)/3) - 20));
 		inventory.setBackground(Color.WHITE);
 		inventory.setBorder(border);
-		inventory.setVerticalAlignment(JLabel.TOP);
+		inventory.setColumns(3);
 		
 		inventoryPanel.add(inventoryLabel);
 		inventoryPanel.add(inventory);
@@ -138,25 +138,27 @@ public class UprootGUI extends JFrame{
 		sidePanel.add("Center", inventoryPanel);
 		sidePanel.add("South", buttons);
 		
-
 		
 		
 		//Create the textfield box for player
 		input.setPreferredSize(new Dimension(50, 50));
 	
-		display.setOpaque(true);
-		display.setBackground(Color.WHITE);
-		display.setBorder(border);
-		display.setPreferredSize(new Dimension(width-520, display.getText().length()));
-		display.setVerticalAlignment(JLabel.TOP);
+
 		
 		displayPane.setPreferredSize(new Dimension(width-500,900));
 		displayPane.setViewportView(display);
 		displayPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		displayPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
+		display.setEditable(false);
+		display.setLineWrap(true);
+		display.setWrapStyleWord(true);
+		display.setOpaque(true);
+		display.setAutoscrolls(true);
+		
 		JScrollBar vertical = displayPane.getVerticalScrollBar();
-		vertical.setValue( vertical.getMaximum() );
+		vertical.setValue( vertical.getMaximum() - 1 );
+		
 		
 		// create the display
 		add("Center", displayPane);
@@ -190,7 +192,12 @@ public class UprootGUI extends JFrame{
 		for (Component component : components) {
 			if (component instanceof JButton) {
 				JButton button = (JButton) component;
-				button.addActionListener(controller);
+				if (button.getText().equals(" ")){
+					continue;
+				}
+				else {
+					button.addActionListener(controller);
+				}
 			}
 		}
 		
@@ -208,10 +215,8 @@ public class UprootGUI extends JFrame{
 	
 	//display the new output to the player in the JLabel	
 	public void setDisplay(String s){ 
-		int textLength = display.getText().length()-7;
-		String newText = display.getText().substring(0, textLength) + "<BR><BR>" + s + "</HTML>";
+		String newText = display.getText()+ "\n \n" + s;
 		display.setText(newText);
-		display.setPreferredSize(new Dimension(width-550,(display.getText().length()/2)));
 		displayPane.setPreferredSize(new Dimension(width-500, display.getHeight()));
 		}
 	
@@ -227,11 +232,10 @@ public class UprootGUI extends JFrame{
 		if(s.isEmpty()) {
 			return;
 		}
-		String newText = "<HTML>-" + s.get(0).getName();
-		for(int i = 1; i<s.size(); i++) {
-			newText = newText +"<BR>- " + s.get(i).getName();		 
+		String newText = "";
+		for(int i = 0; i<s.size(); i++) {
+			newText = newText +" \n - " + s.get(i).getName();		 
 		}
-		newText = newText + "</HTML>";
 		inventory.setText(newText);
 	}
 	

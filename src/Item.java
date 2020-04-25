@@ -48,25 +48,31 @@ public class Item
 		this.locations = location;
 	}
 
-	public void pick()
-	{
-		
+	//Add item to room inventory used at the start of the game
+	void addItem(Room r) {
+		ArrayList<Item> rm = r.getInventory();
+		rm.add(this);
+		r.setInventory(rm);
 	}
 	
 	//Add to inventory for player and remove from room inventory
 	void addItem(Player p, Room r) {
-		p.getInventory().add(this);
-		r.getInventory().remove(this);
+		ArrayList<Item> in = p.getInventory();
+		ArrayList<Item> rm = r.getInventory();
+		in.add(this);
+		rm.remove(this);
+		p.setInventory(in);
+		r.setInventory(rm);
 	}
-		
-	//Add items to rooms - used to place items upon starting the game
-	void addItem(Room r) {
-		r.getInventory().add(this);
-	}
+	
 	//Drop item from the player inventory and place into current room
 	void dropItem(Player p,Room r) {
-		r.getInventory().add(this);
-		p.getInventory().remove(this);
+		ArrayList<Item> in = p.getInventory();
+		ArrayList<Item> rm = r.getInventory();
+		in.remove(this);
+		rm.add(this);
+		p.setInventory(in);
+		r.setInventory(rm);
 	} 
 	
 	

@@ -23,8 +23,8 @@ public class UprootModel {
 	static File navigation = new File(System.getProperty("user.dir") + "/" + "NavigationCommands.txt");
 	static File items = new File(System.getProperty("user.dir") + "/" + "Items.txt");
 	static File puzzles = new File(System.getProperty("user.dir") + "/" + "Puzzles.txt");
-	static File helpCommands = new File(System.getProperty("user.dir") + "/" + "Help Commands.txt");
-	static File monsters = new File(System.getProperty("user.dir") + "/" + "Monster.txt");
+	static File helpCommands = new File(System.getProperty("user.dir") + "/" + "HelpCommands.txt");
+	static File monsters = new File(System.getProperty("user.dir") + "/" + "Monsters.txt");
 	static File description = new File(System.getProperty("user.dir") + "/" + "GameDescription.txt");
 	
 	
@@ -47,8 +47,8 @@ public class UprootModel {
 	public void createPlayer(String name) {
 		game.setPlayer(new Player(1, name, 100, 1));
 		displayValue = "Welcome " + name +"! Today, you will be known as Prince and the King's Eldest son.";
-		displayValue = displayValue.substring(0, displayValue.length()) + "<BR><BR>" + game.displayDescription();
-		displayValue = displayValue.substring(0, displayValue.length()) + "<BR><BR>" + game.startGame();
+		displayValue = displayValue + "\n \n" + game.displayDescription();
+		displayValue = displayValue + "\n \n" + game.startGame();
 	}
 	
 	//Method to place player in their current location and begin game

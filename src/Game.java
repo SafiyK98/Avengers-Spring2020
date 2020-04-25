@@ -20,7 +20,7 @@ public class Game {
 	HashMap<Integer, Monster> hmMonsters;
 	
 	//Stores all the help commands in the game
-	HashMap<String, String> hmHelpCommands;
+	ArrayList<String> helpCommands;
 	
 	//Stores the current Player
 	Player player;
@@ -39,12 +39,15 @@ public class Game {
 		readRooms(rooms);
 		readItems(items);
 		readPuzzles(puzzles);
-//		readMonsters(monsters);
-//		readHelpCommands(helpCommands);
+		readMonsters(monsters);
+		readHelpCommands(helpCommands);
 		readDescription(description);
 		
 		//Set the location for the items
 		setStartingIDItems();
+		setPuzzles();
+		setStartingIDMonsters();
+		
 		
 	}
 	
@@ -53,7 +56,7 @@ public class Game {
 		try {
 			sc = new Scanner(rooms);
 		} catch (FileNotFoundException e) {
-			System.out.print("No such file exists");
+			System.out.print("Rooms file does not exist.");
 		}
 		hmRooms = new HashMap<Integer, Room>();
 		
@@ -87,7 +90,7 @@ public class Game {
 		try {
 			sc = new Scanner(items);
 		} catch (FileNotFoundException e) {
-			System.out.print("No such file exists ");
+			System.out.print("Items file does not exist.");
 		}
 		hmItems = new HashMap<Integer, Item>();
 		
@@ -124,42 +127,72 @@ public class Game {
 	
 	//Method to read the puzzle file
 	void readPuzzles(File puzzles) {
-			try 
-			{
-				sc = new Scanner(puzzles);
-			} 
-			catch(FileNotFoundException e) 
-			{
-				System.out.print("No such file exists");
-			}
-			hmPuzzles = new HashMap<Integer, Puzzle>();
-			while(sc.hasNextLine()) 
-			{
-				String[] strParts = sc.nextLine().split(",");
-				
-					//read from array and create Puzzle object and add to Hashmap
-					int id = Integer.parseInt(strParts[0]);
-					String desc = strParts[1];
-					String hint = strParts[2];
-					String solution = strParts[3];
-					int locationOpen = Integer.parseInt(strParts[4]);
-					int locationPlaced = Integer.parseInt(strParts[5]);
-						
-					Puzzle puzzle = new Puzzle(id, desc, hint, solution, locationOpen, locationPlaced);
-						
-					hmPuzzles.put(puzzle.getID(), puzzle);
+		try {
+			sc = new Scanner(puzzles);
+		} catch(FileNotFoundException e) {
+			System.out.print("Puzzle file does not exist.");
+		}
+		hmPuzzles = new HashMap<Integer, Puzzle>();
+		while(sc.hasNextLine()) 
+		{
+			String[] strParts = sc.nextLine().split(",");
 			
-			}
+			//read from array and create Puzzle object and add to Hashmap
+			int id = Integer.parseInt(strParts[0]);
+			String desc = strParts[1];
+			String hint = strParts[2];
+			String solution = strParts[3];
+			int locationOpen = Integer.parseInt(strParts[4]);
+			int locationPlaced = Integer.parseInt(strParts[5]);
+								
+			Puzzle puzzle = new Puzzle(id, desc, hint, solution, locationOpen, locationPlaced);
+					
+			hmPuzzles.put(puzzle.getID(), puzzle);
+		}
 	}
 	
 	//Method to read the monster file
 	void readMonsters(File monster) {
-		
-	}
+		try {
+			sc = new Scanner(monster);
+		}catch(FileNotFoundException e) {
+			System.out.print("Monster file does not exist.");
+		}
+		hmMonsters = new HashMap<Integer, Monster>();
+		while(sc.hasNext()) {
+			
+			String[] strParts = sc.nextLine().split(",");
+			//read from array and create Puzzle object and add to Hashmap
+			int id = Integer.parseInt(strParts[0]);
+			String name = strParts[1];
+			String desc = strParts[2];
+			int HP = Integer.parseInt(strParts[3]);
+			int min = Integer.parseInt(strParts[4]);
+			int max = Integer.parseInt(strParts[5]);
+			
+			String locations = strParts[6];
+			String[] loc = locations.split(":");
+			ArrayList<Integer> location = new ArrayList<Integer>();
+			for(int i = 0; i<loc.length; i++) {
+				location.add(Integer.parseInt(loc[i]));
+			}
+			
+			Monster mon = new Monster(id, name, desc, HP, min, max, location);
+			hmMonsters.put(mon.getID(),mon);
+			}
+		}
 	
 	//Method to read the helpCommands file
-	void readHelpCommands(File helpCommands) {
-		
+	void readHelpCommands(File helpCom) {
+		try {
+			sc = new Scanner(helpCom);
+		} catch (FileNotFoundException e) {
+			System.out.print("helpcommands file does not exist.");
+		}
+		helpCommands = new ArrayList<String>();
+		while(sc.hasNext()) {
+			helpCommands.add(sc.nextLine());
+		}
 	}
 	
 	//Method to read the game description
@@ -167,33 +200,56 @@ public class Game {
 		try {
 			sc = new Scanner(description);
 		} catch(FileNotFoundException e) {
-			System.out.print("No such file exists");
+			System.out.print("description file does not exist.");
 		}
 		while(sc.hasNextLine()) {
 			this.description = sc.nextLine();
 		}
 	}
 	
-	//Method to set the starting ID for the 3 items
+	//Method to set the starting ID for the items
 	void setStartingIDItems() {	
 		for(int i =1; i<=hmItems.size(); i++) {
 			ArrayList<Integer> locations = hmItems.get(i).getLocation();
-			for(int j = 0; j<locations.size(); j++) {
-				int loc = locations.get(j);
-				if(loc == 0) {
-					loc = (int)(Math.random()*(31-1)) +1;
+			if(locations.size() == 1) {
+				if(locations.get(0)==0) {
+					int rand = (int)(Math.random()*(31-1))+1;
+					hmItems.get(i).addItem(hmRooms.get(rand));
 				}
 				else {
-					loc = locations.get(j);
+					hmItems.get(i).addItem(hmRooms.get(locations.get(0)));
 				}
-			hmItems.get(i).addItem(hmRooms.get(loc));
 			}
+			else {
+				int rand = (int)(Math.random()*(locations.size()-1));
+				hmItems.get(i).addItem(hmRooms.get(locations.get(rand)));
+			}	
+		}
+	}
+	
+	//Method to set the puzzles in their respective locations
+	void setPuzzles() {
+		for(int i =1; i<=hmPuzzles.size(); i++) {
+			int location = hmPuzzles.get(i).getLocationPlaced();
+			hmRooms.get(location).setPuzzle(hmPuzzles.get(i));
 		}
 	}
 	
 	
-	
-	
+	//Method to set the starting ID for the monsters
+	void setStartingIDMonsters() {	
+		for(int i =1; i<=hmMonsters.size(); i++) {
+			ArrayList<Integer> locations = hmMonsters.get(i).getLocation();
+			if(locations.size() == 1) {
+				hmRooms.get(locations.get(0)).setMonster(hmMonsters.get(i));
+			}
+			else {
+				int rand = (int)(Math.random()*(locations.size()-1));
+				hmRooms.get(rand).setMonster(hmMonsters.get(i));
+			}	
+		}
+	}
+		
 	
 	//Method to display the game description
 	String displayDescription() {
@@ -337,45 +393,65 @@ public class Game {
 	String applyCommand(String text) {
 		String response = "";
 		if(text.equalsIgnoreCase("Help")) {
-//			getHelp();
+			response = getHelp();
 		}
 		
 		else if(text.equalsIgnoreCase("Explore")) {
 			response = searchRoom(player.getLocation());
 		}
-		
-		else if(text.contains("Drop") || text.contains("drop")) {
-//			dropItem(text);
+		else if(text.equalsIgnoreCase("Room Description")) {
+			response = hmRooms.get(player.getLocation()).getDescription();
 		}
-		
-		else if(text.contains("Equip") || text.contains("equip")) {
-//			equipItem(text);
+		else if(text.equalsIgnoreCase("Status")) {
+			response = "Your current HP is: " + player.getHP();
 		}
-		
-		else if(text.contains("Examine") || text.contains("examine")) {
-			examineItem(text);
-		}
-		
 		else if(text.contains("Pick up") || text.contains("pick up")) {
 			response = pickUpItem(text);
 		}
-		
-			
-		else if (text.equalsIgnoreCase("Heal")) {
-//			text.useConsumable();
+		else if(text.contains("Drop") || text.contains("drop")) {
+			response = dropItem(text);
+		}
+		else if(text.contains("Examine") || text.contains("examine")) {
+			response = examineItem(text);
+		}
+		else if (text.contains("Consume") || text.contains("consume")) {
+			response = consumeItem(text);
+		}
+		else if(text.contains("Equip") || text.contains("equip")) {
+			response = equipItem(text);
+		}
+		else if(text.contains("Unequip") || text.contains("unequip")) {
+			response = equipItem(text);
 		}
 		return response;
 	}
 	
+		//Method to get help commands
+		String getHelp(){
+			String output = "";
+			for(int i = 0; i<helpCommands.size(); i++) {
+				output = output + "\n"+helpCommands.get(i);
+			}
+			return output;
+		}
+	
 		//Method to search room 
 		String searchRoom(int roomIndex){
 			Room room = hmRooms.get(roomIndex);
+			String ret = "";
 			if(!room.getInventory().isEmpty()) {
-				return "\nIn " + room.getName() + " you find the following things " + room.getInventory();
+				ret = ", " + room.getInventory();
 			}
-			else {
+			if(room.getMonster()!= null) {
+				ret = ret + ", " + room.getMonster().getName();
+			}
+			if(room.getPuzzle()!= null) {
+				ret = ret + ", puzzle";
+			}
+			if(ret.equals(""))
 				return "\nThe " + room.getName() + " has no items in it.";
-			}
+			else
+				return "\nIn the " + room.getName() + " you find the following" + ret;
 		}	
 		
 		//Method to examine item
@@ -394,7 +470,7 @@ public class Game {
 				}
 			}
 			if(yes == true) {
-				return "\n"+items.get(j).getDesc();
+				return items.get(j).getDesc();
 			}
 			else {
 				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
@@ -454,5 +530,82 @@ public class Game {
 				return "Sorry we did not find that item in the player inventory. Make sure to check your spelling.";
 			}
 		}
+		
+		//Method to equip item
+		String equipItem(String text) {
+			ArrayList<Item> items = player.getInventory();
+			if(items.isEmpty()) {
+				return "Sorry, the player inventory is empty. You have no items to equip.";
+			}
+			boolean yes = false;
+			int j =0;
+			for(int i = 0; i<items.size(); i++) {
+				if(text.substring(6).equalsIgnoreCase(items.get(i).getName())) {
+					yes = true;
+					j = i;
+				}
+			}
+			
+			if(!(items.get(j) instanceof Equipable)) {
+				return "Sorry but that item is not equippable. Maybe try to consume it.";
+			}
+			else if(yes == true) {
+				Equipable item = (Equipable)items.get(j);
+				item.equip(player);
+				return item.getName() + " has been successfully equipped";
+			}
+			else {
+				return "Sorry but that item was not equipped";
+			}
+		}
+		
+		//Method to unequip item
+		String unequipItem(String text) {
+			ArrayList<Equipable> items= player.getEquipped();
+			if(items.isEmpty()) {
+				return "Sorry,you currently have no items equipped.";
+			}
+			int j =0;
+			boolean yes = false;
+			for(int i = 0; i<items.size(); i++) {
+				if(text.substring(8).equalsIgnoreCase(items.get(i).getName())) {
+					yes = true;
+					j = i;
+				}
+			}
+			if(yes == true) {
+				Equipable item = items.get(j);
+				item.unequip(player);
+				return item.getName() + " has been successfully unequipped";
+			}
+			return "Sorry, that item could not be unequipped successfully.";
+		}
+		
+		//Method to examine item
+		String consumeItem(String text) {
+			int roomIndex = player.getLocation();
+			Room room = hmRooms.get(roomIndex);
+			ArrayList<Item> items = player.getInventory();
+			int j = 0;
+			boolean yes = false;
+			for(int k = 0; k<items.size(); k++) {
+				Item item = items.get(k);
+				if(text.substring(8).equalsIgnoreCase(item.getName())) {
+					yes = true;
+					j = k;
+				}
+				if(room.getInventory().contains(item)) {
+					yes = true;
+				}
+			}
+			if(yes == true) {
+				Consumable item = (Consumable) items.get(j);
+				item.consume(player);
+				return item.getName() + " has been successfully consumed and your health has been rejuvinated. Type \"Status\" to check your HP.";
+			}
+			else {
+				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
+				}
+			}
 
 }
