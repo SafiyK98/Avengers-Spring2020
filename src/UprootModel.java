@@ -141,7 +141,7 @@ public class UprootModel {
 			String[] line = sc.nextLine().split(":");
 			if(info.contains(line[0]) || info.contains(line[0].toLowerCase())) {
 				prevSaved = true;
-				lineToRemove = line[0] + line[1];
+				lineToRemove = line[0] + ":" + line[1];
 			}
 		}
 		

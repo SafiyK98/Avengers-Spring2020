@@ -601,6 +601,7 @@ public class Game {
 			if(yes == true) {
 				Item item = items.get(j);
 				item.addItem(player, room);
+				item.setLocationPlaced(-1);
 				return item.getName() + " has been picked up from the room and successfully added to the player inventory.";
 				
 			}
@@ -723,10 +724,12 @@ public class Game {
 			//Add player info
 			info = info + player.getName() +":" + player.getHP() + ";" + player.getLocation() + ";";
 			ArrayList<Equipable> eq = player.getEquipped();
-			for(int i = 1; i<eq.size(); i++) {
-				info = info + eq.get(i).getId() + "&";
+			if(!eq.isEmpty()) {
+				for(int i = 1; i<eq.size(); i++) {
+					info = info + eq.get(i).getId() + "&";
+				}
+				info = info + eq.get(0).getId() + "/";
 			}
-			info = info + eq.get(0).getId() + "/";
 			
 			//Add puzzle info
 			for(int i = 1; i<hmPuzzles.size(); i++) {
