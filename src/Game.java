@@ -198,7 +198,6 @@ public class Game {
 			Monster mon = new Monster(id, name, desc, HP, min, max, location);
 			hmMonsters.put(mon.getID(),mon);
 			}
-		System.out.print(hmMonsters);
 		}
 	
 	//Method to read the helpCommands file
@@ -317,7 +316,7 @@ public class Game {
 				}
 			}
 			else {
-				int rand = (int)(Math.random()*(locations.size()-1));
+				int rand = (int)(Math.random()*(locations.size()-1)+1);
 				hmItems.get(i).addItem(hmRooms.get(locations.get(rand)));
 			}	
 		}
@@ -348,9 +347,7 @@ public class Game {
 				}
 			}
 			else {
-				int rand = (int)(Math.random()*(locations.size()-1));
-				System.out.println(i);
-				System.out.println(hmMonsters.get(i));
+				int rand = (int)(Math.random()*(locations.size()-1) +1);
 				hmRooms.get(rand).setMonster(hmMonsters.get(i));
 				hmMonsters.get(i).setLocationPlaced(locations.get(rand));
 			}	
@@ -742,7 +739,6 @@ public class Game {
 			for(int i = 1; i<hmMonsters.size(); i++) {
 				info = info + hmMonsters.get(i).getID() + "&" + hmMonsters.get(i).getHP() + "&" + hmMonsters.get(i).getLocationPlaced() + ";";
 			}
-			System.out.print(hmMonsters.size());
 			info = info + hmMonsters.get(hmMonsters.size()).getID() + "&" + hmMonsters.get(hmMonsters.size()).getHP() + "&" + hmMonsters.get(hmMonsters.size()).getLocationPlaced();
 			info = info+ "/";
 			

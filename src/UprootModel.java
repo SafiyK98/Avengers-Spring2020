@@ -1,8 +1,11 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -127,14 +130,51 @@ public class UprootModel {
 	//Method to save the game
 	public void saveGame() {
 		String info = game.saveGame();
+		boolean prevSaved = false;
+		try {
+			sc = new Scanner(savedPlayers);
+		} catch(FileNotFoundException e) {
+			System.out.print("description file does not exist.");
+		}
+		String lineToRemove = "";
+		while(sc.hasNextLine()) {
+			String[] line = sc.nextLine().split(":");
+			if(info.contains(line[0]) || info.contains(line[0].toLowerCase())) {
+				prevSaved = true;
+				lineToRemove = line[0] + line[1];
+			}
+		}
+		
+		 if(prevSaved == true) {
+			 File tempFile = new File("myTemp.txt");
+			 try {
+				BufferedReader reader = new BufferedReader(new FileReader(savedPlayers));
+				try {
+					BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+					 String currentLine;
+					 while((currentLine = reader.readLine()) != null) {
+						 String trimmedLine = currentLine.trim();
+						 if(trimmedLine.contentEquals(lineToRemove))
+							 continue;
+						 writer.write(currentLine + "\n");
+					 }
+					 writer.close();
+					 reader.close();
+					 tempFile.renameTo(savedPlayers);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}			 
+			 
+
+		 }
 		 try {
-	         if (!savedPlayers.exists()) {
-	            savedPlayers.createNewFile();
-	         } 
-	         FileWriter fw = new FileWriter(savedPlayers.getAbsoluteFile());
-	         BufferedWriter bw = new BufferedWriter(fw);
-	         bw.write(info);
-	         bw.close();
+			 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(savedPlayers.getName(), true)));
+			 out.println(info);
+			 out.close();
+	         
 	         displayValue = "Game saved successfully";
 	      } catch (IOException e) {
 	         e.printStackTrace();
