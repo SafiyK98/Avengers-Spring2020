@@ -731,16 +731,15 @@ public class Game {
 			}
 			else if(command.equalsIgnoreCase("Attack")) {
 				response = player.playerAttack(hmRooms.get(player.getLocation()).getMonster());
-				if(player.getHP() == 0)
-					response = response + "\nYour health is at 0. You have been defeated by the monster.";
-				
-				//Monster retaliation attack
-				response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
-				
 				if(hmRooms.get(player.getLocation()).getMonster().getHP() == 0) {
 					response = response + "\nYou killed the monster! Congratulations.";
 					hmRooms.get(player.getLocation()).setMonster(null);
 				}
+				//Monster retaliation attack
+				response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
+				
+				if(player.getHP() == 0)
+					response = response + "\nYour health is at 0. You have been defeated by the monster.";
 				
 			}
 			else if(command.equalsIgnoreCase("Stats")) {
