@@ -65,15 +65,11 @@ public class Monster extends Entity{
 	{
 		int monsterAttack = (int)(Math.random() * (this.maxAttack - this.minAttack)) + this.minAttack;
 		int newHealth = p.getHP() - monsterAttack;
-		if(newHealth < 0)
-			newHealth = 0;
+		if(newHealth < 0) {
+			newHealth = 0; 
+		}
 		p.setHP(newHealth);
 		return "\nThe monster attacks back decreases your health by "+ monsterAttack;
-	}
-	
-	//Kill monster
-	void killMonster() {
-		HP = 0;
 	}
 	
 	

@@ -43,11 +43,13 @@ public class UprootController implements ActionListener{
 			model.createPlayer(command);
 		} else if(model.loadPlayer==true) {
 			model.loadPlayerInfo(command);
-			view.updateInventory(model.getInventory(), model.getEquipped());
+			if(model.loadedPlayer == true)
+				view.updateInventory(model.getInventory(), model.getEquipped());
 		} else if(model.attack == true) {
 			model.attackMode(command);
-		} else if(command.equalsIgnoreCase("Attack")) {
-			model.attackMode(command);
+			if(model.getValue().contains("defeated"))
+				System.exit(0);
+			view.updateInventory(model.getInventory(), model.getEquipped());
 		} else if (command.equalsIgnoreCase("Start New Game")) {
 			model.startNewGame();
 		} else if (command.equalsIgnoreCase("Save Game")) {
@@ -64,7 +66,7 @@ public class UprootController implements ActionListener{
 			model.moveSouth();
 		} else if (command.equals("West")) {
 			model.moveWest();
-		}  else {
+		} else {
 			model.applyCommand(command);
 			view.updateInventory(model.getInventory(), model.getEquipped());
 		}
