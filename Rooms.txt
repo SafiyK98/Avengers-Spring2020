@@ -13,7 +13,7 @@
 13,NW2,The armory has overflowed to consume this room as well. This castle looks well protected.,0,14,12,0,20,7,2
 14,Sword Room,The north area of the armory overlooks the grass. A door can be seen through a stained glass window.,0,15,0,13,22,6,2
 15,NE2,An empty room sits on the northeast quadrant of the second floor of the castle.,0,0,16,14,23,5,2
-16,Armory 1,An empty bed sits in the room. There are weapons on the wall that would likely intimidate guests. A stained-glass window overlooks an outdoor corridor with the family crest. In the distance to the northeast is an ominous fog.,15,0,17,0,8,24,2
+16,Armory 1,An empty bed sits in the room. There are weapons on the wall that would likely intimidate guests. A stained-glass window overlooks an outdoor corridor with the family crest. In the distance to the northeast is an ominous fog.,15,0,17,0,24,8,2
 17,SE2,An empty room sits in the corner.,16,0,0,10,25,3,2
 18,Restroom,The only restroom in the castle overlooks a bridge; there is a gold bar on the sink. Could it be soap?,0,25,0,19,0,10,3
 19,SW3,This room is the highest room in the castle that overlooks the ocean and the farthest from the graveyard. Dolphins can be seen skimming the coast. This room has an odd serenity about it...,20,18,0,0,0,13,3
