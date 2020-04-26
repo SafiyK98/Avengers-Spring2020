@@ -496,7 +496,7 @@ public class Game {
 	
 	//Method to apply other commands 
 	String applyCommand(String text) {
-		String response = "";
+		String response = "Sorry, that is not a valid command. Please try again.";
 		if(text.equalsIgnoreCase("Help")) {
 			response = getHelp();
 		}
@@ -522,12 +522,13 @@ public class Game {
 		else if (text.contains("Consume") || text.contains("consume")) {
 			response = consumeItem(text);
 		}
+		else if(text.contains("Unequip") || text.contains("unequip")) {
+			response = unequipItem(text);
+		}
 		else if(text.contains("Equip") || text.contains("equip")) {
 			response = equipItem(text);
 		}
-		else if(text.contains("Unequip") || text.contains("unequip")) {
-			response = equipItem(text);
-		}
+	
 		return response;
 	}
 	
@@ -538,6 +539,16 @@ public class Game {
 				output = output + "\n"+helpCommands.get(i);
 			}
 			return output;
+		}
+		
+		//Method to get the monster in the current room of the player
+		Monster getMonster() {
+			return hmRooms.get(player.getLocation()).getMonster();
+		}
+		
+		//Method to get the puzzle in the current room of the player
+		Puzzle getPuzzle() {
+			return hmRooms.get(player.getLocation()).getPuzzle();
 		}
 	
 		//Method to search room 
@@ -569,7 +580,7 @@ public class Game {
 			int j = 0;
 			boolean yes = false;
 			for(int k = 0; k<items.size(); k++) {
-				if(text.substring(8).equalsIgnoreCase(items.get(k).getName())) {
+				if(text.toLowerCase().contains(items.get(k).getName().toLowerCase())) {
 					yes = true;
 					j = k;
 				}
@@ -594,7 +605,7 @@ public class Game {
 			int j = 0;
 			boolean yes = false;
 			for(int i = 0; i<items.size(); i++) {
-				if(text.substring(8).equalsIgnoreCase(items.get(i).getName())) {
+				if(text.toLowerCase().contains(items.get(i).getName().toLowerCase())) {
 					yes = true;
 					j = i;
 				}
@@ -608,9 +619,7 @@ public class Game {
 				item.setLocationPlaced(-1);
 				return item.getName() + " has been picked up from the room and successfully added to the player inventory.";
 			}
-			else {
-				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
-			}
+			return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
 		}
 		
 		//Method to drop items
@@ -623,7 +632,7 @@ public class Game {
 			int j =0;
 			boolean yes = false;
 			for(int i = 0; i<items.size(); i++) {
-				if(text.substring(5).equalsIgnoreCase(items.get(i).getName())) {
+				if(text.toLowerCase().contains(items.get(i).getName().toLowerCase())) {
 					yes = true;
 					j = i;
 				}
@@ -631,7 +640,7 @@ public class Game {
 			if(yes == true) {
 				Item item = items.get(j);
 				item.dropItem(player);
-				return items.get(j).getName() + " has been dropped successfully from the player inventory and placed in the " + room.getName();
+				return item.getName() + " has been dropped successfully from the player inventory and placed in the " + room.getName();
 				
 			}
 			else {
@@ -648,7 +657,7 @@ public class Game {
 			boolean yes = false;
 			int j =0;
 			for(int i = 0; i<items.size(); i++) {
-				if(text.substring(6).equalsIgnoreCase(items.get(i).getName())) {
+				if(text.toLowerCase().contains(items.get(i).getName().toLowerCase())) {
 					yes = true;
 					j = i;
 				}
@@ -662,9 +671,7 @@ public class Game {
 				item.equip(player);
 				return item.getName() + " has been successfully equipped";
 			}
-			else {
-				return "Sorry but that item was not equipped";
-			}
+			return "Sorry but that item could not be successfully equipped";
 		}
 		
 		//Method to unequip item
@@ -676,7 +683,7 @@ public class Game {
 			int j =0;
 			boolean yes = false;
 			for(int i = 0; i<items.size(); i++) {
-				if(text.substring(8).equalsIgnoreCase(items.get(i).getName())) {
+				if(text.toLowerCase().contains(items.get(i).getName().toLowerCase())) {
 					yes = true;
 					j = i;
 				}
@@ -718,12 +725,22 @@ public class Game {
 		
 		//Method to handle when in combat with a monster
 		String attack(String command) {
-			String response = "";
+			String response = "Sorry, that is not a valid command. Please try again.";
 			if(hmRooms.get(player.getLocation()).getMonster() == null) {
 				response = "Sorry but there is no monster in this room.";
 			}
 			else if(command.equalsIgnoreCase("Attack")) {
 				response = player.playerAttack(hmRooms.get(player.getLocation()).getMonster());
+				if(hmRooms.get(player.getLocation()).getMonster().getHP() == 0) {
+					response = response + "\nYou killed the monster! Congratulations.";
+					hmRooms.get(player.getLocation()).setMonster(null);
+				}
+				//Monster retaliation attack
+				response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
+				
+				if(player.getHP() == 0)
+					response = response + "\nYour health is at 0. You have been defeated by the monster.";
+				
 			}
 			else if(command.equalsIgnoreCase("Stats")) {
 				response = hmRooms.get(player.getLocation()).getMonster().getName() + " : " + hmRooms.get(player.getLocation()).getMonster().getDescription() + " Health = " + hmRooms.get(player.getLocation()).getMonster().getHP();
@@ -757,7 +774,29 @@ public class Game {
 		}
 		
 		
+		//Method to handle when you encounter a puzzle
+		String playPuzzle(String command) {
+			String response = "Sorry, that is not a valid command. Please try again.";
+			String answer = getPuzzle().getSolution();
+			if(command.equalsIgnoreCase("Explore Puzzle"))
+				response = getPuzzle().getDescription();
+			else if (command.equalsIgnoreCase("Hint"))
+				response = getPuzzle().getHint();
+			else
+				response = answerPuzzle(command);
+				
+			return response;
+		}
 		
+		//Method to check the answer of a puzzle
+		String answerPuzzle(String answer) {
+			String response = "Sorry, that answer is incorrect.";
+			if(getPuzzle().getSolution().equalsIgnoreCase(answer))
+				response = "Congratulations, You solved the puzzle.";
+			
+			
+			return response;
+		}
 		
 		
 		//Method to save the game

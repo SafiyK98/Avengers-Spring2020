@@ -27,6 +27,12 @@ public class UprootModel {
 	//This will be to enter fight mode
 	public boolean attack = false;
 	
+	//Used to store if a player was successfully loaded
+	public boolean loadedPlayer = true;
+	
+	//This will be used to enter puzzle mode
+	public boolean solve = false;
+	
 	//This hashmap will store the rooms
 	private Game game;
 	
@@ -121,11 +127,13 @@ public class UprootModel {
 	public void loadPlayerInfo(String name) {
 		if(!(playersInfo.containsKey(name))) {
 			displayValue = "Sorry, that player name is not in our records. Please enter a valid player name.";
+			loadedPlayer = false;
 		}
 		else {
 			game = new Game(rooms,items,puzzles, monsters, helpCommands,description,name, playersInfo.get(name));
 			displayValue = "Welcome back " + name + "! Start the game where you left off.";
 			displayValue = displayValue + "\n \n" + game.startGame();
+			loadedPlayer = true;
 			loadPlayer = false;
 		}
 	}
@@ -253,11 +261,31 @@ public class UprootModel {
 	
 	//Method for attack mode with the monster
 	public void attackMode(String command) {
+		if(game.getMonster()!= null)
+			attack = true;
 		displayValue = game.attack(command);
-		if(game.getPlayer().getHP() <= 0) {
-			displayValue = displayValue + "\nYou health is at 0. You have been defeated by the monster.";
+		if(displayValue.contains("killed")) {
+			attack = false;
+		}
+		if(displayValue.contains("abandoned")) {
+			attack = false;
 		}
 		
 	}
+	
+	//Method for puzzle mode
+		public void solvePuzzle(String command) {
+			if(game.getPuzzle()!= null)
+				solve = true;
+			displayValue = game.playPuzzle(command);
+			
+			if(displayValue.contains("failed")) {
+				attack = false;
+			}
+			if(displayValue.contains("solved")) {
+				attack = false;
+			}
+			
+		}
 	
 }
