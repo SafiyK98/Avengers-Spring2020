@@ -24,6 +24,9 @@ public class UprootModel {
 	//This will hold if the player needs to start a new game
 	public boolean createPlayer = false;
 	
+	//This will be to enter fight mode
+	public boolean attack = false;
+	
 	//This hashmap will store the rooms
 	private Game game;
 	
@@ -246,6 +249,12 @@ public class UprootModel {
 	//Method to get the player equipped items to update the view
 	public ArrayList<Equipable> getEquipped(){
 		return game.getPlayer().getEquipped();
+	}
+	
+	//Method for attack mode with the monster
+	public void attackMode(String command) {
+		displayValue = game.attack(command);
+		
 	}
 	
 }

@@ -46,16 +46,16 @@ public class Player extends Entity{
 	}
 	
 	//Player attack monster
-	void playerAttack(Monster monster) {
-		
+	String playerAttack(Monster monster) {
+		String response = "";
 		ArrayList<Equipable> equippedItems = this.equipped;
 		int attackDamage = (int)(Math.random()*(50-1)) + 1;
 		
-		System.out.println("Player HP: " + this.HP + "        Monster HP: " + monster.getHP());
+		response = "Player HP: " + this.HP + "        Monster HP: " + monster.getHP();
 		
 		//Player has no items equipped
 		if (equippedItems.isEmpty()) {
-			System.out.println("You attack the monster and deal damage of " +  attackDamage);
+			response = response + "\nYou attack the monster and deal damage of " +  attackDamage;
 			monster.setHP(monster.getHP()-attackDamage);
 		}
 		
@@ -65,14 +65,14 @@ public class Player extends Entity{
 			for(int i = 0; i<equippedItems.size(); i++) {
 				addedAttack = addedAttack + equippedItems.get(i).getAttack();
 			}
-			int addedDamage =  (int) (attackDamage*(addedAttack*0.01));
-			System.out.println("You attack the monster and deal damage of " +  (attackDamage + addedAttack));
+			response = response + "You attack the monster and deal damage of " +  (attackDamage + addedAttack);
 			monster.setHP(monster.getHP()-(attackDamage+addedAttack));
 		}
 		
 		//Monster retaliation attack
-		monster.monsterAttack(this);
+		response = response + monster.monsterAttack(this);
 		
+		return response;
 	}
 	
 }

@@ -256,6 +256,7 @@ public class Game {
 			int ID = Integer.parseInt(puzzleParts[0]);
 			Puzzle puzzle = hmPuzzles.get(ID);
 			String s = puzzleParts[1];
+			
 			puzzle.setSolved(s);
 			int location = Integer.parseInt(puzzleParts[2]);
 			puzzle.setLocationPlaced(location);
@@ -712,6 +713,23 @@ public class Game {
 				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
 				}
 			}
+		
+		//Method to handle when in combat with a monster
+		String attack(String command) {
+			String response = "";
+			if(hmRooms.get(player.getLocation()).getMonster() == null) {
+				response = "Sorry but there is no monster in this room.";
+			}
+			else if(command.equalsIgnoreCase("Attack")) {
+				response = player.playerAttack(hmRooms.get(player.getLocation()).getMonster());
+			}
+			else if(command.equalsIgnoreCase("Stats")) {
+				response = hmRooms.get(player.getLocation()).getMonster().getName() + " : " + hmRooms.get(player.getLocation()).getMonster().getDescription() + " Health = " + hmRooms.get(player.getLocation()).getMonster().getHP();
+			}
+			
+			
+			return response;
+		}
 		
 		
 		
