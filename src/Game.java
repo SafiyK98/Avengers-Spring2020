@@ -744,24 +744,25 @@ public class Game {
 		//Method to handle when in combat with a monster
 		String attack(String command) {
 			String response = "Sorry, that is not a valid command. Please try again.";
+			Monster monster = getMonster();
 			if(hmRooms.get(player.getLocation()).getMonster() == null) {
 				response = "Sorry but there is no monster in this room.";
 			}
 			else if(command.equalsIgnoreCase("Attack")) {
-				response = player.playerAttack(hmRooms.get(player.getLocation()).getMonster());
-				if(hmRooms.get(player.getLocation()).getMonster().getHP() == 0) {
-					response = response + "\nYou killed the monster! Congratulations.";
+				response = player.playerAttack(monster);
+				if(monster.getHP() == 0) {
 					hmRooms.get(player.getLocation()).setMonster(null);
+					return response + "\nYou killed the monster! Congratulations.";				
 				}
 				//Monster retaliation attack
-				response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
+				response = response + monster.monsterAttack(player);
 				
 				if(player.getHP() == 0)
-					response = response + "\nYour health is at 0. You have been defeated by the monster.";
+					return response + "\nYour health is at 0. You have been defeated by the monster.";
 				
 			}
 			else if(command.equalsIgnoreCase("Stats")) {
-				response = hmRooms.get(player.getLocation()).getMonster().getName() + " : " + hmRooms.get(player.getLocation()).getMonster().getDescription() + " Health = " + hmRooms.get(player.getLocation()).getMonster().getHP();
+				response = monster.getName() + " : " + monster.getDescription() + " Health = " + monster.getHP();
 			}
 			else if(command.equalsIgnoreCase("Status")) {
 				response = "Your current HP is: " + player.getHP();
@@ -778,13 +779,13 @@ public class Game {
 			else if(command.equalsIgnoreCase("Abandon Fight")) {
 				double rand = Math.random();
 				if(rand>0.5) {
-					int health = hmRooms.get(player.getLocation()).getMonster().getOriginalHealth();
-					hmRooms.get(player.getLocation()).getMonster().setHP(health);
+					int health = monster.getOriginalHealth();
+					monster.setHP(health);
 					response = "You have abandoned the fight";
 				}
 				else {
 					response = "You couldn't get away from the monster.";
-					response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
+					response = response + monster.monsterAttack(player);
 				}
 			}
 			
