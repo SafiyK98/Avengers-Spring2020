@@ -254,6 +254,9 @@ public class UprootModel {
 	//Method for attack mode with the monster
 	public void attackMode(String command) {
 		displayValue = game.attack(command);
+		if(game.getPlayer().getHP() <= 0) {
+			displayValue = displayValue + "\nYou health is at 0. You have been defeated by the monster.";
+		}
 		
 	}
 	

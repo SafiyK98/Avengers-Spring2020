@@ -4,9 +4,9 @@
 4,Wood Planks, Wood planks lie on a grave; can be used as a last resort if you have no weapons.,5,0,100
 5,Spell scroll, A rare and strange magical scroll whose contents are unreadable. If used during battle Zombie�s Health Points will be reduced to 0.,100,0,27:21
 6,Gold Soap, A beautiful bar of soap; though not very practical. A decorative item that serves no purpose in battle.,0,0,18
-7,Wine, Good for the heart.,15,1,31:27:30:13:22
+7,Wine, Good for the heart.,15,1,31
 8,Shield, A protective shield; identical to the crest on the East Hall. Damage dealt is reduced by 25%.,25,0,8:26
-9,Sword, A long sharp red-handled sword.,25,0,31:4:14:12
+9,Sword, A long sharp red-handled sword.,25,0,31
 10,Dagger, A small dull white-handled dagger. Something seems special about it... might come in handy later,10,0,28:16
 11,Enchanted Gold Statue, Ooh Shiny! This enchanted statue has a strange yet welcoming feeling. The statue is yelling "TAKE ME!",0,0,27
 12,Potion, A delicious elixir; shiny and vibrant purple.,40,1,27:7:29:30:28:11:14:23:24

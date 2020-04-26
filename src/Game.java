@@ -195,7 +195,7 @@ public class Game {
 				location.add(Integer.parseInt(loc[i]));
 			}
 			
-			Monster mon = new Monster(id, name, desc, HP, min, max, location);
+			Monster mon = new Monster(id, name, desc, HP,HP, min, max, location);
 			hmMonsters.put(mon.getID(),mon);
 			}
 		}
@@ -601,10 +601,12 @@ public class Game {
 			}
 			if(yes == true) {
 				Item item = items.get(j);
+				if(item.getId()==9) {
+					return "Congratulations, you have won the game!";
+				}
 				item.addItem(player, room);
 				item.setLocationPlaced(-1);
 				return item.getName() + " has been picked up from the room and successfully added to the player inventory.";
-				
 			}
 			else {
 				return "Sorry we did not find that item in the " + room.getName() +". Make sure to check your spelling.";
@@ -726,7 +728,30 @@ public class Game {
 			else if(command.equalsIgnoreCase("Stats")) {
 				response = hmRooms.get(player.getLocation()).getMonster().getName() + " : " + hmRooms.get(player.getLocation()).getMonster().getDescription() + " Health = " + hmRooms.get(player.getLocation()).getMonster().getHP();
 			}
-			
+			else if(command.equalsIgnoreCase("Status")) {
+				response = "Your current HP is: " + player.getHP();
+			}
+			else if (command.contains("Consume") || command.contains("consume")) {
+				response = consumeItem(command);
+			}
+			else if(command.contains("Equip") || command.contains("equip")) {
+				response = equipItem(command);
+			}
+			else if(command.contains("Unequip") || command.contains("unequip")) {
+				response = equipItem(command);
+			}
+			else if(command.equalsIgnoreCase("Abandon Fight")) {
+				double rand = Math.random();
+				if(rand>0.5) {
+					int health = hmRooms.get(player.getLocation()).getMonster().getOriginalHealth();
+					hmRooms.get(player.getLocation()).getMonster().setHP(health);
+					response = "You have abandoned the fight";
+				}
+				else {
+					response = "You couldn't get away from the monster.";
+					response = response + hmRooms.get(player.getLocation()).getMonster().monsterAttack(player);
+				}
+			}
 			
 			return response;
 		}

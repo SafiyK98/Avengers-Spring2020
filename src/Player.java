@@ -56,7 +56,10 @@ public class Player extends Entity{
 		//Player has no items equipped
 		if (equippedItems.isEmpty()) {
 			response = response + "\nYou attack the monster and deal damage of " +  attackDamage;
-			monster.setHP(monster.getHP()-attackDamage);
+			int newHealth = monster.getHP()-attackDamage;
+			if(newHealth < 0)
+				newHealth = 0;
+			monster.setHP(newHealth);
 		}
 		
 		//Player has item(s) equipped
@@ -66,7 +69,10 @@ public class Player extends Entity{
 				addedAttack = addedAttack + equippedItems.get(i).getAttack();
 			}
 			response = response + "You attack the monster and deal damage of " +  (attackDamage + addedAttack);
-			monster.setHP(monster.getHP()-(attackDamage+addedAttack));
+			int newHealth = monster.getHP()-(attackDamage+addedAttack);
+			if(newHealth < 0)
+				newHealth = 0;
+			monster.setHP(newHealth);
 		}
 		
 		//Monster retaliation attack

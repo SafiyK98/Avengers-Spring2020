@@ -25,6 +25,7 @@ Exit:		Closes the game at any point
 -Interact with Monster-
 
 Stats:		Displays the monsters name, description, and HP.
+Status:			This will display the players current HP.
 Attack: 		Deals damage to the monster 
 Abandon Fight: 	Gives the player a 50% chance of abandoning the fight. This abandons progress in current battle
 Consume: 		See "Interact with Items"
