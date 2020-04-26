@@ -748,6 +748,8 @@ public class Game {
 			if(hmRooms.get(player.getLocation()).getMonster() == null) {
 				response = "Sorry but there is no monster in this room.";
 			}
+			else if(command.equalsIgnoreCase("Help"))
+				response = getHelp();
 			else if(command.equalsIgnoreCase("Attack")) {
 				response = player.playerAttack(monster);
 				if(monster.getHP() == 0) {
@@ -798,6 +800,8 @@ public class Game {
 			String response = "Sorry, that is not a valid command. Please try again."; 
 			if(command.equalsIgnoreCase("Explore Puzzle"))
 				response = getPuzzle().getDescription();
+			else if(command.equalsIgnoreCase("Help"))
+				response = getHelp();
 			else if (command.equalsIgnoreCase("Hint"))
 				response = getPuzzle().getHint();
 			else
