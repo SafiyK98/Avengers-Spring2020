@@ -265,7 +265,8 @@ public class UprootModel {
 	//Method to drop item
 	public void dropItem(String command) {
 		if (command.equalsIgnoreCase("Yes")) {
-			game.applyCommand(c);
+			displayValue = game.applyCommand(c);
+			drop = false;
 		}
 		drop = false;
 	}
