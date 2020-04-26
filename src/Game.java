@@ -243,7 +243,9 @@ public class Game {
 		String[] equippedItems = playerParts[2].split("&");
 		for(int i = 0; i<equippedItems.length; i++) {
 			int itemId = Integer.parseInt(equippedItems[i]);
-			eq.add((Equipable) hmItems.get(itemId));
+			if(itemId != 0) {
+				eq.add((Equipable) hmItems.get(itemId));
+			}
 		}
 		player.setEquipped(eq);
 	}
@@ -256,7 +258,6 @@ public class Game {
 			int ID = Integer.parseInt(puzzleParts[0]);
 			Puzzle puzzle = hmPuzzles.get(ID);
 			String s = puzzleParts[1];
-			
 			puzzle.setSolved(s);
 			int location = Integer.parseInt(puzzleParts[2]);
 			puzzle.setLocationPlaced(location);
@@ -863,6 +864,9 @@ public class Game {
 					info = info + eq.get(i).getId() + "&";
 				}
 				info = info + eq.get(0).getId() + "/";
+			}
+			else {
+				info = info + "0/";
 			}
 			
 			//Add puzzle info
