@@ -15,16 +15,16 @@ Unequip + (item name): 	Removes the item from the player and adjuststhe players 
 
 -Interact with Puzzles-
 
-Explore puzzle: 	Allows the player to enter puzzle mode
+Explore puzzle: 		Allows the player to enter puzzle mode
 Hint:		Gives the player a hint for the puzzle
 (puzzle answer):	Valid responses that can be typed during puzzle mode
 
 -Interact with Monster-
 
 Stats:		Displays the monsters name, description, and HP.
-Status:			This will display the players current HP.
+Status:		This will display the players current HP.
 Attack: 		Deals damage to the monster 
-Abandon Fight: 	Gives the player a 50% chance of abandoning the fight. This abandons progress in current battle
+Abandon Fight: 		Gives the player a 50% chance of abandoning the fight. This abandons progress in current battle
 Consume: 		See "Interact with Items"
 Equip:		See "Interact with Items"
 Unequip: 		See "Interact with Items"

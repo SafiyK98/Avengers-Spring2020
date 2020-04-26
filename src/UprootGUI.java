@@ -242,6 +242,12 @@ public class UprootGUI extends JFrame{
 		inventory.setText(newText);
 	}
 	
+	//Method to start next game
+	public void startNewGame() {
+		display.setText("");
+		displayPane.setPreferredSize(new Dimension(width-500, display.getHeight()));
+	}
+	
 	//Method to update the map image for the GUI
 	public void updateImage(int level) {
 		File f = new File("/Users/sophiehoare/Desktop/Avengers/Avengers-Spring2020/Floor"+level+".png");

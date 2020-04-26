@@ -658,7 +658,7 @@ public class Game {
 			if(yes == true) {
 				Item item = items.get(j);
 				item.dropItem(player);
-				return item.getName() + " has been dropped successfully from the player inventory and placed in the " + room.getName();
+				return item.getName() + " has been dropped successfully from the player inventory";
 				
 			}
 			else {
