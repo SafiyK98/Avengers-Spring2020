@@ -48,13 +48,30 @@ public class Player extends Entity{
 	//Player attack monster
 	String playerAttack(Monster monster) {
 		String response = "";
-		ArrayList<Equipable> equippedItems = this.equipped;
+		ArrayList<Equipable> equippedItems = getEquipped();
+		ArrayList<Item> inventoryItems = getInventory();
+		boolean spellScroll = false;
+		int j = 0;
+		for(int i = 0; i<inventoryItems.size(); i++) {
+			if(inventoryItems.get(i).getId() == 5) {
+				spellScroll = true;
+				j=1;
+			}
+		}
+		
 		int attackDamage = (int)(Math.random()*(50-1)) + 1;
 		
 		response = "Player HP: " + this.HP + "        Monster HP: " + monster.getHP();
 		
+		if(spellScroll == true) {
+			if(monster.getID() == 4 || monster.getID() == 7) {
+				response = response + "\nYou have the spell scroll in your inventory which automatically kills the zombie. The spell scroll have now been removed from your inventory.";
+				inventoryItems.remove(j);
+				setInventory(inventoryItems);
+			}
+		}
 		//Player has no items equipped
-		if (equippedItems.isEmpty()) {
+		else if (equippedItems.isEmpty()) {
 			response = response + "\nYou attack the monster and deal damage of " +  attackDamage;
 			int newHealth = monster.getHP()-attackDamage;
 			if(newHealth < 0)

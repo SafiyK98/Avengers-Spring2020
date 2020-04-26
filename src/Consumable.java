@@ -21,11 +21,14 @@ public class Consumable extends Item{
 	
 
 	public void consume(Player p){
+		ArrayList<Item> pInventory = p.getInventory();
 		int currentHealth = p.getHP();
 		int newHealth = currentHealth + healthIncrease;
 		if(newHealth>100) {
 			newHealth = 100;
 		}
+		pInventory.remove(this);
+		p.setInventory(pInventory);
 		p.setHP(newHealth);
 	}
 }

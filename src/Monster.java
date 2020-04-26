@@ -63,13 +63,28 @@ public class Monster extends Entity{
 	//Monster attack player
 	String monsterAttack(Player p) 
 	{
-		int monsterAttack = (int)(Math.random() * (this.maxAttack - this.minAttack)) + this.minAttack;
-		int newHealth = p.getHP() - monsterAttack;
+		ArrayList<Equipable> pEquipped = p.getEquipped();
+		boolean sheild = false;
+		for(int i = 0; i<pEquipped.size(); i++) {
+			if(pEquipped.get(i).getId()==8) {
+				sheild = true;
+			}
+		}
+		double monsterAttack = (int)(Math.random() * (this.maxAttack - this.minAttack)) + this.minAttack;
+		if(sheild == true) {
+			monsterAttack = monsterAttack * 0.75;
+		}
+		int newHealth = (int)(p.getHP() - monsterAttack);
 		if(newHealth < 0) {
 			newHealth = 0; 
 		}
 		p.setHP(newHealth);
-		return "\nThe monster attacks back decreases your health by "+ monsterAttack;
+		if(sheild == true) {
+			return "\nThe monster attacks back but you have the sheild equipped so his attack is decreased by 25%. You now have health of " + newHealth;
+		}
+		else {
+			return "\nThe monster attacks back decreases your health by "+ monsterAttack;
+		}
 	}
 	
 	

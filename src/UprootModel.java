@@ -268,7 +268,10 @@ public class UprootModel {
 			displayValue = game.applyCommand(c);
 			drop = false;
 		}
-		drop = false;
+		else {
+			displayValue = "You did not successfully drop that item and it will remain in your inventory.";
+			drop = false;
+		}
 	}
 	
 	//Method to get the player inventory to update the view

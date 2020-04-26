@@ -1,5 +1,6 @@
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.Color;
@@ -49,6 +50,8 @@ public class UprootGUI extends JFrame{
 	
 	private JScrollPane inventoryPane = new JScrollPane();
 	
+	private JButton explore = new JButton();
+	
 	private JMenu menu;
 	
 	//Used to store the image of the map
@@ -57,8 +60,8 @@ public class UprootGUI extends JFrame{
 	//Use to hold the map image
 	private ImageIcon image;
 	
-	int height= 850;
-	int width = 1000;
+	int height= 800;
+	int width = 800;
 	
 	
 	//Creates the panel and components for the JFrame
@@ -76,6 +79,9 @@ public class UprootGUI extends JFrame{
 		JMenuItem startNewButton = new JMenuItem("Start New Game");
 		menu.add(startNewButton);
 		
+		JMenuItem loadGame = new JMenuItem("Load Saved Game");
+		menu.add(loadGame);
+		
 		JMenuItem saveButton = new JMenuItem("Save Game");
 		menu.add(saveButton);
 		
@@ -86,7 +92,7 @@ public class UprootGUI extends JFrame{
 		
 
 		buttons.setLayout(new GridLayout(3,4));
-		buttons.setPreferredSize(new Dimension(490,(int) ((height-500)/3)));
+		buttons.setPreferredSize(new Dimension(440,(int) ((height-450)/3)));
 		
 		String[] buttonStrings = {
 				"Up", "s", "North", "s",
@@ -109,22 +115,22 @@ public class UprootGUI extends JFrame{
 		
 		image = new ImageIcon(f.getName());
 		map = new JLabel(image);
-		map.setPreferredSize(new Dimension(490, 500));
+		map.setPreferredSize(new Dimension(440, 450));
 	
 		
 		Border border = LineBorder.createBlackLineBorder();
 		
 		JPanel inventoryPanel = new JPanel();
-		inventoryPanel.setPreferredSize(new Dimension(490,(int) ((height-500)/3)));
+		inventoryPanel.setPreferredSize(new Dimension(440,(int) ((height-450)/3)));
 		inventoryPanel.setBackground(Color.DARK_GRAY);
 		
 		
 		inventoryLabel.setOpaque(true);
-		inventoryLabel.setPreferredSize(new Dimension(490, 20));
+		inventoryLabel.setPreferredSize(new Dimension(440, 20));
 		inventoryLabel.setBackground(Color.WHITE);
 		inventoryLabel.setBorder(border);
 		
-		inventoryPane.setPreferredSize(new Dimension(500, (int) ((height-500)/3) - 20));
+		inventoryPane.setPreferredSize(new Dimension(450, (int) ((height-450)/3) - 20));
 		inventoryPane.setViewportView(inventory);
 		inventoryPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		inventoryPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -138,20 +144,32 @@ public class UprootGUI extends JFrame{
 		inventoryPanel.add(inventoryPane);
 		
 		Panel sidePanel = new Panel();
-		sidePanel.setPreferredSize(new Dimension(500,800));
+		sidePanel.setPreferredSize(new Dimension(450,800));
 		sidePanel.setBackground(Color.DARK_GRAY);
 		sidePanel.add("North", map);
 		sidePanel.add("Center", inventoryPanel);
 		sidePanel.add("South", buttons);
 		
+		explore = new JButton("Explore");
+		explore.setBackground(Color.WHITE);
+		explore.setPreferredSize(new Dimension(100,40));
 		
+		Panel inputPanel = new Panel();
+		inputPanel.setPreferredSize(new Dimension(800,50));
+		inputPanel.setBackground(Color.WHITE);
+		
+		input.setPreferredSize(new Dimension(680,40));
 		
 		//Create the textfield box for player
-		input.setPreferredSize(new Dimension(50, 50));
+		inputPanel.setPreferredSize(new Dimension(800, 50));
+		FlowLayout flow = new FlowLayout();
+		inputPanel.setLayout(flow);
+		inputPanel.add(input);
+		inputPanel.add(explore);
 	
 
 		
-		displayPane.setPreferredSize(new Dimension(width-500,900));
+		displayPane.setPreferredSize(new Dimension(width-450,900));
 		displayPane.setViewportView(display);
 		displayPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		displayPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -168,7 +186,7 @@ public class UprootGUI extends JFrame{
 		
 		// create the display
 		add("Center", displayPane);
-		add("South", input);
+		add("South", inputPanel);
 		add("East", sidePanel);
 		
 		input.addKeyListener(new KeyListener() {
@@ -216,6 +234,7 @@ public class UprootGUI extends JFrame{
 		}
 		
 		input.addActionListener(controller);
+		explore.addActionListener(controller);
 	}
 	
 	
@@ -223,7 +242,7 @@ public class UprootGUI extends JFrame{
 	public void setDisplay(String s){ 
 		String newText = display.getText()+ "\n \n" + s;
 		display.setText(newText);
-		displayPane.setPreferredSize(new Dimension(width-500, display.getHeight()));
+		displayPane.setPreferredSize(new Dimension(width-450, display.getHeight()));
 		}
 	
 	//Method to clear the input textField
