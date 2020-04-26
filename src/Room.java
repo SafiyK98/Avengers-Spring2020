@@ -73,6 +73,36 @@ public class Room {
 		return Down;
 	}
 	
+	//Set room North of current room
+	void setNorth(int i) {
+		North = i;
+	}
+	
+	//Set room East of current room
+	void setEast(int i) {
+		East = i;
+	}
+	
+	//Set room South of current room
+	void setSouth(int i) {
+		South = i;
+	}
+	
+	//Set room West of current room
+	void setWest(int i) {
+		West = i;
+	}
+	
+	//Set room Up of current room
+	void setUp(int i) {
+		Up = i;
+	}
+	
+	//Set room Down of current room
+	void setDown(int i) {
+		Down = i;
+	}
+	
 	//Get level of current room
 	int getLevel() {
 		return Level;

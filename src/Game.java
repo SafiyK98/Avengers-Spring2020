@@ -394,6 +394,9 @@ public class Game {
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
 		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
+		}
 		
 		else {
 			currentRoom.setVisited(true);
@@ -411,6 +414,9 @@ public class Game {
 		
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
+		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
 		}
 		
 		else {
@@ -430,6 +436,9 @@ public class Game {
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
 		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
+		}
 		
 		else {
 			currentRoom.setVisited(true);
@@ -447,6 +456,9 @@ public class Game {
 		
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
+		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
 		}
 		
 		else {
@@ -466,6 +478,9 @@ public class Game {
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
 		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
+		}
 		
 		else {
 			currentRoom.setVisited(true);
@@ -483,6 +498,9 @@ public class Game {
 		
 		if (newRoomIndex==0) {
 			return "Sorry, you can not move that direction.";
+		}
+		if (newRoomIndex == -1) {
+			return "Sorry, that door is lock. You can not move that direction right now.";
 		}
 		
 		else {
@@ -776,8 +794,7 @@ public class Game {
 		
 		//Method to handle when you encounter a puzzle
 		String playPuzzle(String command) {
-			String response = "Sorry, that is not a valid command. Please try again.";
-			String answer = getPuzzle().getSolution();
+			String response = "Sorry, that is not a valid command. Please try again."; 
 			if(command.equalsIgnoreCase("Explore Puzzle"))
 				response = getPuzzle().getDescription();
 			else if (command.equalsIgnoreCase("Hint"))
@@ -791,11 +808,37 @@ public class Game {
 		//Method to check the answer of a puzzle
 		String answerPuzzle(String answer) {
 			String response = "Sorry, that answer is incorrect.";
-			if(getPuzzle().getSolution().equalsIgnoreCase(answer))
+			if(getPuzzle().getID() ==1) {
+				if(answer.toLowerCase().contains(getPuzzle().getSolution().toLowerCase())) {
+					response = "Congratulations, You solved the puzzle.";
+					unlockRooms();
+				}
+				
+			}
+			if(getPuzzle().getSolution().equalsIgnoreCase(answer)) {
 				response = "Congratulations, You solved the puzzle.";
-			
-			
+				unlockRooms();
+			}
 			return response;
+		}
+		
+		//Method to unlock locked rooms once a puzzle is solved
+		void unlockRooms() {
+			Puzzle puzzle = getPuzzle();
+			hmRooms.get(player.getLocation()).setPuzzle(null);
+			Room room = hmRooms.get(puzzle.getLocationPlaced());
+			if(room.getNorth() == -1)
+				room.setNorth(puzzle.getLocationOpen());
+			if(room.getEast() == -1)
+				room.setEast(puzzle.getLocationOpen());
+			if(room.getSouth() == -1)
+				room.setSouth(puzzle.getLocationOpen());
+			if(room.getWest() == -1)
+				room.setWest(puzzle.getLocationOpen());
+			if(room.getUp() == -1)
+				room.setUp(puzzle.getLocationOpen());
+			if(room.getDown() == -1)
+				room.setDown(puzzle.getLocationOpen());
 		}
 		
 		

@@ -50,6 +50,8 @@ public class UprootController implements ActionListener{
 			if(model.getValue().contains("defeated"))
 				System.exit(0);
 			view.updateInventory(model.getInventory(), model.getEquipped());
+		} else if (model.solve == true) {
+			model.solvePuzzle(command);
 		} else if (command.equalsIgnoreCase("Start New Game")) {
 			model.startNewGame();
 		} else if (command.equalsIgnoreCase("Save Game")) {

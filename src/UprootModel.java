@@ -278,12 +278,8 @@ public class UprootModel {
 			if(game.getPuzzle()!= null)
 				solve = true;
 			displayValue = game.playPuzzle(command);
-			
-			if(displayValue.contains("failed")) {
-				attack = false;
-			}
 			if(displayValue.contains("solved")) {
-				attack = false;
+				solve = false;
 			}
 			
 		}
