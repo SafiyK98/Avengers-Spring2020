@@ -246,13 +246,7 @@ public class UprootModel {
 	
 	//Method for model to apply text command from player
 	public void applyCommand(String command) {
-		if(command.equalsIgnoreCase("Attack")) {
-			attackMode(command);
-		}
-		else if(command.equalsIgnoreCase("Explore Puzzle"))
-			solvePuzzle(command);
-		else
-			displayValue = game.applyCommand(command);
+		displayValue = game.applyCommand(command);
 	}
 	
 	//Method to get the player inventory to update the view

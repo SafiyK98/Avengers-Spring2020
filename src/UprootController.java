@@ -66,7 +66,11 @@ public class UprootController implements ActionListener{
 			model.moveSouth();
 		} else if (command.equals("West")) {
 			model.moveWest();
-		} else {
+		} else if(command.equalsIgnoreCase("Attack")) {
+			model.attackMode(command);
+		} else if(command.equalsIgnoreCase("Explore Puzzle")) {
+			model.solvePuzzle(command);
+		} else{
 			model.applyCommand(command);
 			view.updateInventory(model.getInventory(), model.getEquipped());
 		}

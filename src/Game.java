@@ -778,12 +778,25 @@ public class Game {
 		String playPuzzle(String command) {
 			String response = "Sorry, that is not a valid command. Please try again.";
 			String answer = getPuzzle().getSolution();
-//			if(command.equalsIgnoreCase("Explore Puzzle"))
+			if(command.equalsIgnoreCase("Explore Puzzle"))
+				response = getPuzzle().getDescription();
+			else if (command.equalsIgnoreCase("Hint"))
+				response = getPuzzle().getHint();
+			else
+				response = answerPuzzle(command);
 				
 			return response;
 		}
 		
-		
+		//Method to check the answer of a puzzle
+		String answerPuzzle(String answer) {
+			String response = "Sorry, that answer is incorrect.";
+			if(getPuzzle().getSolution().equalsIgnoreCase(answer))
+				response = "Congratulations, You solved the puzzle.";
+			
+			
+			return response;
+		}
 		
 		
 		//Method to save the game
