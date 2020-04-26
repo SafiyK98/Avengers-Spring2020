@@ -820,7 +820,7 @@ public class Game {
 				}
 				
 			}
-			if(getPuzzle().getSolution().equalsIgnoreCase(answer)) {
+			else if(getPuzzle().getSolution().equalsIgnoreCase(answer)) {
 				response = "Congratulations, You solved the puzzle.";
 				unlockRooms();
 			}
@@ -832,6 +832,10 @@ public class Game {
 			Puzzle puzzle = getPuzzle();
 			hmRooms.get(player.getLocation()).setPuzzle(null);
 			Room room = hmRooms.get(puzzle.getLocationPlaced());
+			if(puzzle.getLocationOpen()==0) {
+				room.setEast(3);
+				room.setWest(9);
+			}
 			if(room.getNorth() == -1)
 				room.setNorth(puzzle.getLocationOpen());
 			if(room.getEast() == -1)

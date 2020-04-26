@@ -52,6 +52,8 @@ public class UprootController implements ActionListener{
 			view.updateInventory(model.getInventory(), model.getEquipped());
 		} else if (model.solve == true) {
 			model.solvePuzzle(command);
+		}else if (model.drop == true) {
+			model.dropItem();
 		} else if (command.equalsIgnoreCase("Start New Game")) {
 			model.startNewGame();
 		} else if (command.equalsIgnoreCase("Save Game")) {

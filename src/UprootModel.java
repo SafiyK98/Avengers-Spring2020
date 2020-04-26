@@ -33,6 +33,9 @@ public class UprootModel {
 	//This will be used to enter puzzle mode
 	public boolean solve = false;
 	
+	//This will be used to ensure a player wants to drop an item
+	public boolean drop = false;
+	
 	//This hashmap will store the rooms
 	private Game game;
 	
@@ -246,7 +249,16 @@ public class UprootModel {
 	
 	//Method for model to apply text command from player
 	public void applyCommand(String command) {
+		if(command.toLowerCase().contains("drop item")) {
+			drop = true;
+			displayValue = "Are you sure you want to drop this item?";
+		}
 		displayValue = game.applyCommand(command);
+	}
+	
+	//Method to drop item
+	public void dropItem() {
+		
 	}
 	
 	//Method to get the player inventory to update the view
