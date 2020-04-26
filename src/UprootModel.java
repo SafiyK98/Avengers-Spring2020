@@ -41,6 +41,9 @@ public class UprootModel {
 	
 	//This will store the current level the player is on to change the map
 	private int roomLevel = 1;
+	
+	//Stores the command for dropping an item
+	String c = "";
 
 	//This will store all of the players and their info
 	private HashMap<String, String> playersInfo;
@@ -249,16 +252,22 @@ public class UprootModel {
 	
 	//Method for model to apply text command from player
 	public void applyCommand(String command) {
-		if(command.toLowerCase().contains("drop item")) {
+		if(command.toLowerCase().contains("drop")) {
 			drop = true;
 			displayValue = "Are you sure you want to drop this item?";
+			c = command;
 		}
-		displayValue = game.applyCommand(command);
+		else {
+			displayValue = game.applyCommand(command);
+		}
 	}
 	
 	//Method to drop item
-	public void dropItem() {
-		
+	public void dropItem(String command) {
+		if (command.equalsIgnoreCase("Yes")) {
+			game.applyCommand(c);
+		}
+		drop = false;
 	}
 	
 	//Method to get the player inventory to update the view

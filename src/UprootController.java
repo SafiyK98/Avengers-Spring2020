@@ -53,7 +53,7 @@ public class UprootController implements ActionListener{
 		} else if (model.solve == true) {
 			model.solvePuzzle(command);
 		}else if (model.drop == true) {
-			model.dropItem();
+			model.dropItem(command);
 		} else if (command.equalsIgnoreCase("Start New Game")) {
 			model.startNewGame();
 		} else if (command.equalsIgnoreCase("Save Game")) {
