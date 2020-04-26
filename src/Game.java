@@ -164,7 +164,6 @@ public class Game {
 			int locationPlaced = Integer.parseInt(strParts[5]);
 								
 			Puzzle puzzle = new Puzzle(id, desc, hint, solution, locationOpen, locationPlaced);
-					
 			hmPuzzles.put(puzzle.getID(), puzzle);
 		}
 	}
@@ -258,7 +257,8 @@ public class Game {
 			int ID = Integer.parseInt(puzzleParts[0]);
 			Puzzle puzzle = hmPuzzles.get(ID);
 			String s = puzzleParts[1];
-			puzzle.setSolved(s);
+			Boolean solved = Boolean.parseBoolean(s);
+			puzzle.setSolved(solved);
 			int location = Integer.parseInt(puzzleParts[2]);
 			puzzle.setLocationPlaced(location);
 		}
@@ -328,7 +328,9 @@ public class Game {
 	void setPuzzles() {
 		for(int i =1; i<=hmPuzzles.size(); i++) {
 			int location = hmPuzzles.get(i).getLocationPlaced();
-			if(location == 0)
+			if((hmPuzzles.get(i)).getSolve() == true)
+				unlockRooms(hmPuzzles.get(i));
+			else if(location == 0)
 				continue;
 			else
 				hmRooms.get(location).setPuzzle(hmPuzzles.get(i));
@@ -817,21 +819,22 @@ public class Game {
 			if(getPuzzle().getID() ==1) {
 				if(answer.toLowerCase().contains(getPuzzle().getSolution().toLowerCase())) {
 					response = "Congratulations, You solved the puzzle.";
-					unlockRooms();
+					unlockRooms(getPuzzle());
+					hmRooms.get(getPuzzle().getLocationPlaced()).setPuzzle(null);
 				}
 				
 			}
 			else if(getPuzzle().getSolution().equalsIgnoreCase(answer)) {
 				response = "Congratulations, You solved the puzzle.";
-				unlockRooms();
+				unlockRooms(getPuzzle());
+				hmRooms.get(getPuzzle().getLocationPlaced()).setPuzzle(null);
 			}
 			return response;
 		}
 		
 		//Method to unlock locked rooms once a puzzle is solved
-		void unlockRooms() {
-			Puzzle puzzle = getPuzzle();
-			hmRooms.get(player.getLocation()).setPuzzle(null);
+		void unlockRooms(Puzzle puzzle) {
+			puzzle.setSolved(true);
 			Room room = hmRooms.get(puzzle.getLocationPlaced());
 			if(puzzle.getLocationOpen()==0) {
 				room.setEast(3);

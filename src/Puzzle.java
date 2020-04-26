@@ -92,18 +92,12 @@ public class Puzzle
 		this.solution = solution;
 	}
 
-	public String getSolve() {
-		if(solved = true)
-			return "true";
-		else
-			return "false";
+	public Boolean getSolve() {
+		return solved;
 	}
 	
-	public void setSolved(String b) {
-		if(b.equals("true"))
-			solved = true;
-		else
-			solved = false;
+	public void setSolved(Boolean b) {
+		solved = b;
 	}
 
 	@Override

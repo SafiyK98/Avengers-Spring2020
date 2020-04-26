@@ -47,6 +47,8 @@ public class UprootGUI extends JFrame{
 	
 	private JTextArea inventory = new JTextArea("");
 	
+	private JScrollPane inventoryPane = new JScrollPane();
+	
 	private JMenu menu;
 	
 	//Used to store the image of the map
@@ -122,14 +124,18 @@ public class UprootGUI extends JFrame{
 		inventoryLabel.setBackground(Color.WHITE);
 		inventoryLabel.setBorder(border);
 		
+		inventoryPane.setPreferredSize(new Dimension(500, (int) ((height-500)/3) - 20));
+		inventoryPane.setViewportView(inventory);
+		inventoryPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		inventoryPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		inventory.setEditable(false);
+		inventory.setLineWrap(true);
+		inventory.setWrapStyleWord(true);
 		inventory.setOpaque(true);
-		inventory.setPreferredSize(new Dimension(500, (int) ((height-500)/3) - 20));
-		inventory.setBackground(Color.WHITE);
-		inventory.setBorder(border);
-		inventory.setColumns(3);
+		inventory.setAutoscrolls(true);
 		
 		inventoryPanel.add(inventoryLabel);
-		inventoryPanel.add(inventory);
+		inventoryPanel.add(inventoryPane);
 		
 		Panel sidePanel = new Panel();
 		sidePanel.setPreferredSize(new Dimension(500,800));
