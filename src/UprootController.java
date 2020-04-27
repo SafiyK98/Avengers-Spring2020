@@ -58,7 +58,7 @@ public class UprootController implements ActionListener{
 		} else if (command.equalsIgnoreCase("Start New Game")) {
 			model.startNewGame();
 			view.startNewGame();
-		} else if (command.equalsIgnoreCase("Load New Game")) {
+		} else if (command.equalsIgnoreCase("Load Saved Game")) {
 			model.loadPlayerInfo(command);
 			if(model.loadedPlayer == true)
 				view.updateInventory(model.getInventory(), model.getEquipped());

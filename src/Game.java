@@ -793,6 +793,12 @@ public class Game {
 					response = response + monster.monsterAttack(player);
 				}
 			}
+			if(monster.getHP() == 0) {
+				hmRooms.get(player.getLocation()).setMonster(null);
+				return response + "\nYou killed the monster! Congratulations.";				
+			}
+			if(player.getHP() == 0)
+				return response + "\nYour health is at 0. You have been defeated by the monster.";
 			
 			return response;
 		}

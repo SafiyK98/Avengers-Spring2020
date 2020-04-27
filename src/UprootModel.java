@@ -36,6 +36,7 @@ public class UprootModel {
 	//This will be used to ensure a player wants to drop an item
 	public boolean drop = false;
 	
+	
 	//This hashmap will store the rooms
 	private Game game;
 	
@@ -288,9 +289,16 @@ public class UprootModel {
 	public void attackMode(String command) {
 		if(game.getMonster()!= null)
 			attack = true;
+		
 		displayValue = game.attack(command);
+		
 		if(displayValue.contains("killed")) {
 			attack = false;
+		}
+		if(displayValue.contains("defeated")) {
+			attack = false;
+			displayValue =  displayValue + "\n \n \nWould you like to: \nStart New Game \nLoad Saved Game \nExit";
+			newGame = true;
 		}
 		if(displayValue.contains("abandoned")) {
 			attack = false;
