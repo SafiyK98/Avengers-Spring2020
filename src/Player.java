@@ -55,7 +55,7 @@ public class Player extends Entity{
 		for(int i = 0; i<inventoryItems.size(); i++) {
 			if(inventoryItems.get(i).getId() == 5) {
 				spellScroll = true;
-				j=1;
+				j=i;
 			}
 		}
 		
