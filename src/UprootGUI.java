@@ -257,9 +257,6 @@ public class UprootGUI extends JFrame{
 	
 	//Method to update the inventory
 	public void updateInventory(ArrayList<Item> s, ArrayList<Equipable> eq) {
-		if(s.isEmpty()) {
-			return;
-		}
 		String newText = "";
 		if(s.size() == 0) {
 			inventory.setText("");
