@@ -68,6 +68,7 @@ public class Player extends Entity{
 				response = response + "\nYou have the spell scroll in your inventory which automatically kills the zombie. The spell scroll have now been removed from your inventory.";
 				inventoryItems.remove(j);
 				setInventory(inventoryItems);
+				monster.setHP(0);
 			}
 		}
 		//Player has no items equipped

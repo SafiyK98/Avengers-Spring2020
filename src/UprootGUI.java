@@ -61,7 +61,7 @@ public class UprootGUI extends JFrame{
 	private ImageIcon image;
 	
 	int height= 800;
-	int width = 800;
+	int width = 1000;
 	
 	
 	//Creates the panel and components for the JFrame
@@ -155,10 +155,10 @@ public class UprootGUI extends JFrame{
 		explore.setPreferredSize(new Dimension(100,40));
 		
 		Panel inputPanel = new Panel();
-		inputPanel.setPreferredSize(new Dimension(800,50));
+		inputPanel.setPreferredSize(new Dimension(1000,50));
 		inputPanel.setBackground(Color.WHITE);
 		
-		input.setPreferredSize(new Dimension(680,40));
+		input.setPreferredSize(new Dimension(880,40));
 		
 		//Create the textfield box for player
 		inputPanel.setPreferredSize(new Dimension(800, 50));
