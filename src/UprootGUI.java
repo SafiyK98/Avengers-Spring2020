@@ -130,7 +130,7 @@ public class UprootGUI extends JFrame{
 		inventoryLabel.setBackground(Color.WHITE);
 		inventoryLabel.setBorder(border);
 		
-		inventoryPane.setPreferredSize(new Dimension(450, (int) ((height-450)/3) - 20));
+		inventoryPane.setPreferredSize(new Dimension(450, (int) ((height-450)/3)-30));
 		inventoryPane.setViewportView(inventory);
 		inventoryPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		inventoryPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -139,6 +139,9 @@ public class UprootGUI extends JFrame{
 		inventory.setWrapStyleWord(true);
 		inventory.setOpaque(true);
 		inventory.setAutoscrolls(true);
+		
+		JScrollBar vertical = inventoryPane.getVerticalScrollBar();
+		vertical.setValue( vertical.getMaximum() - 1 );
 		
 		inventoryPanel.add(inventoryLabel);
 		inventoryPanel.add(inventoryPane);
@@ -180,8 +183,8 @@ public class UprootGUI extends JFrame{
 		display.setOpaque(true);
 		display.setAutoscrolls(true);
 		
-		JScrollBar vertical = displayPane.getVerticalScrollBar();
-		vertical.setValue( vertical.getMaximum() - 1 );
+		JScrollBar vert = displayPane.getVerticalScrollBar();
+		vert.setValue( vertical.getMaximum() - 1 );
 		
 		
 		// create the display
