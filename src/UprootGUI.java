@@ -261,6 +261,9 @@ public class UprootGUI extends JFrame{
 			return;
 		}
 		String newText = "";
+		if(s.size() == 0) {
+			inventory.setText("");
+		}
 		for(int i = 0; i<s.size(); i++) {
 			if(eq.contains(s.get(i)))
 				newText = newText + " \n - " + s.get(i).getName() + " (E)";
